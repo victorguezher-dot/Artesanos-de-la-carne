@@ -1487,6 +1487,7 @@ html{background:#171310}
 @media (hover:hover) and (pointer:fine){.foot .gz:hover{color:var(--cream)}}
 .gz:focus-visible{outline:2px solid var(--brass2);outline-offset:4px;border-radius:4px}
 
+.gsa #heroC{animation:none!important}
 .nosl .tbar b{transition:transform .5s var(--ease)}
 
 /* ---------- Phone menu: the carta runs edge to edge ---------- */
@@ -2485,6 +2486,12 @@ if(sda) document.documentElement.classList.add("sda");
 /* Phones without them (iPhone before iOS 26): nothing follows the scroll. Section titles use the ordinary one-shot reveal,
    the cover text stays put, the tour photos don't zoom and its progress bars fill a step at a time. */
 var nosl=touch && !sda && !reduce;
+/* The Google app on iPhone resizes the page itself while its bars slide away, so on the cover everything tied to the
+   screen height keeps shifting during the first scroll. There the cover keeps the height it opened with (see lockHero)
+   and its text does not react to the scroll. */
+var gsa=/\bGSA\//.test(navigator.userAgent) && /iP(hone|ad|od)/.test(navigator.userAgent);
+if(gsa) document.documentElement.classList.add("gsa");
+function lockHero(force){ if(!gsa) return; var h=$("#hero"); if(!h || (!force && h.style.height)) return; h.style.height=""; if(h.offsetHeight){ h.style.height=h.offsetHeight+"px"; heroFit(); } }
 if(nosl) document.documentElement.classList.add("nosl");
 function collectSL(){
   SL=(sda||nosl)?[]:$$(".page.on .sl");
@@ -2549,6 +2556,7 @@ function show(p){
   }
   var ph=$(".page.on .ph"); if(ph && p.r!=="menu"){ ph.classList.remove("go"); void ph.offsetWidth; ph.classList.add("go"); }
   document.documentElement.classList.toggle("home",p.r==="inicio");
+  if(p.r==="inicio") lockHero();
   if(p.r==="inicio" && heroPlayed) playHero(); heroPlayed=true;
   setTitle(); scrollTo(0,0); reveal(); collectSL(); renderStatus();
 }
@@ -2589,7 +2597,7 @@ addEventListener("hashchange",go);
 document.addEventListener("securitypolicyviolation",function(e){ if(/google/.test(e.blockedURI||"")) $$("iframe[data-map]").forEach(function(f){ f.remove(); }); });
 addEventListener("scroll",onScroll,{passive:true});
 var lastW=innerWidth;
-addEventListener("resize",function(){ if(touch && innerWidth===lastW){ heroFit(); return; } lastW=innerWidth; collectSL(); fitHero(); heroFit(); });
+addEventListener("resize",function(){ if(touch && innerWidth===lastW){ heroFit(); return; } lastW=innerWidth; lockHero(true); collectSL(); fitHero(); heroFit(); });
 /* Some in-app browsers (the Google app on iPhone) change the height of the page itself when their bars slide away,
    which moves the cover text: whenever the cover's own size changes, line the photo up with the switch again. */
 try{ new ResizeObserver(function(){ heroFit(); }).observe($("#hero")); }catch(e){}
