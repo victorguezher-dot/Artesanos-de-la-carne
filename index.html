@@ -46,7 +46,7 @@ d.setAttribute("data-hb",b);[["l","(min-width:761px)"],["p","(max-width:760px)"]
 }
 *{box-sizing:border-box}
 html{background:var(--bg);-webkit-text-size-adjust:100%;scroll-behavior:auto}
-body{margin:0;min-height:100dvh;background:radial-gradient(1100px 620px at 85% -8%,rgba(201,147,95,.07),transparent 62%),var(--bg);color:var(--cream);font:400 17px/1.55 var(--f-b);-webkit-font-smoothing:antialiased;overflow-x:clip}
+body{margin:0;min-height:100vh;min-height:100svh;background:radial-gradient(1100px 620px at 85% -8%,rgba(201,147,95,.07),transparent 62%),var(--bg);color:var(--cream);font:400 17px/1.55 var(--f-b);-webkit-font-smoothing:antialiased;overflow-x:clip}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='170'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -1437,26 +1437,27 @@ html{background:#171310}
 
 /* ---------- Phones: nothing that has to be recomputed on every scroll frame ---------- */
 @media (hover:none) and (pointer:coarse),(max-width:760px){
-  /* paper grain: a plain overlay instead of a full-screen multiply blend */
-  body::after{mix-blend-mode:normal;opacity:.3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .24 0 0 0 0 .18 0 0 0 0 .12 0 0 0 -.9 .62'/%3E%3C/filter%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .26 0 0 0 0 .2 0 0 0 0 .13 0 0 0 -1.6 .95'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='.22'/%3E%3C/svg%3E")}
+  /* paper grain: a pre-rendered tile on a layer of constant size (it used to be recomputed whenever the browser bar moved) */
+  body::after{mix-blend-mode:normal;opacity:.27;inset:auto;top:0;left:0;width:100%;height:100vh;height:100lvh;background-image:url("img/paper.webp");background-size:260px 260px}
   /* reveals keep their rise, fade and focus-in; only blocks that carry photos skip the blur (a large blurred photo is the costly part) */
   .js .rv:has(img):not(.in),.js .step.rv:has(img):not(.in){filter:none}
   /* floating bars: solid glass instead of live blur of the page behind them */
   .nav{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(21,18,15,.9)}
   .waf{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(21,18,15,.88)}
   .isl{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(27,23,19,.97)}
+  .hbg.c::before{filter:none}
   .ov{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(17,14,11,.97)}
   .sheet{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(17,14,11,.98)}
 }
 
 /* ---------- Phones with scroll-driven animations: the scroll-linked motion runs with the scroll, not behind it ---------- */
 @keyframes slIn{from{opacity:.18;transform:translate3d(0,64px,0)}to{opacity:1;transform:none}}
-@keyframes heroUp{from{transform:none}to{transform:translate3d(0,-14.4vh,0)}}
+@keyframes heroFade{from{opacity:1}to{opacity:0}}
 @keyframes tourZoom{from{transform:scale(1)}to{transform:scale(1.1)}}
 @keyframes tourBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @supports (animation-timeline:view()){
   .sda .sl{animation:slIn linear both;animation-timeline:view();animation-range:cover 0% cover 30vh}
-  .sda #heroC{animation:heroUp linear both;animation-timeline:scroll(root block);animation-range:0px 120vh}
+  .sda #heroC{animation:heroFade linear both;animation-timeline:scroll(root block);animation-range:35vh 92vh}
   .sda .tour{view-timeline:--tour block}
   .sda .tour .ts img{animation:tourZoom linear both;animation-timeline:--tour}
   .sda .tour .tbar b{animation:tourBar linear both;animation-timeline:--tour}
@@ -1468,6 +1469,13 @@ html{background:#171310}
   .sda .tour3 .ts:nth-child(2) img,.sda .tour3 .tbar i:nth-child(2) b{animation-range:contain 33.333% contain 66.667%}
   .sda .tour3 .ts:nth-child(3) img,.sda .tour3 .tbar i:nth-child(3) b{animation-range:contain 66.667% contain 100%}
 }
+
+/* ---------- Footer credit ---------- */
+.foot .bot{align-items:center}
+.foot .gz{display:inline-flex;align-items:center;gap:8px;min-height:0;padding:12px 0;margin:-12px 0;font-size:inherit;line-height:inherit;color:inherit;text-decoration:none;transition:color .16s ease}
+.gz svg{width:16px;height:14px;fill:currentColor;flex:none}
+@media (hover:hover) and (pointer:fine){.foot .gz:hover{color:var(--cream)}}
+.gz:focus-visible{outline:2px solid var(--brass2);outline-offset:4px;border-radius:4px}
 
 /* ---------- Phone menu: the carta runs edge to edge ---------- */
 @media (max-width:760px){
@@ -1829,7 +1837,7 @@ html{background:#171310}
     <div><h4 data-i="co.hours">Horario</h4><p data-i-html="f.hours">La Higuera · 8:30&nbsp;am a 12:30&nbsp;pm<br>La Crianza · desde la 1:30&nbsp;pm</p></div>
     <div class="fc-contact"><h4 data-i="f.contact">Contacto</h4><a data-tel="crianza" href="tel:+522212546202">La Crianza · 221 254 6202</a><br><a data-tel="higuera" href="tel:+522212013196">La Higuera · 221 201 3196</a><br><a href="mailto:artesanosdelacarne@gmail.com">artesanosdelacarne@gmail.com</a></div>
     <div class="fc-soc"><h4 data-i="co.soc">Redes</h4><div class="fsoc" data-soc="list"></div></div>
-    <div class="bot"><span>© 2026 Grupo Artesanos de la Carne</span><span data-i="f.credit">Sitio por Guezher Studio</span></div>
+    <div class="bot"><span>© 2026 Grupo Artesanos de la Carne</span><a class="gz" href="https://wa.me/528131235526?text=Hola%2C%20vi%20el%20sitio%20de%20La%20Crianza%201939%20y%20me%20interesa%20uno%20para%20mi%20negocio." target="_blank" rel="noopener"><svg viewBox="0 0 67 60" aria-hidden="true"><g transform="translate(-20 -24)"><path d="M50 84C30 80 18 62 22 34C42 40 52 60 50 84Z" opacity=".62"/><path d="M50 84C52 56 62 34 82 24C88 54 74 78 50 84Z"/></g></svg><span data-i="f.credit">Sitio por Guezher Studio</span></a></div>
   </div>
 </footer>
 
@@ -2451,7 +2459,7 @@ function tick(){
   if(!reduce){
     var hc=route==="inicio"?$("#heroC"):null;
     if(route==="inicio"||route==="nosotros") tourTick(vh);
-    if(hc && !sda && y<vh*1.2){ hc.style.transform="translate3d(0,"+(-y*.12)+"px,0)"; }
+    if(hc && !sda && y<vh*1.2){ if(touch) hc.style.opacity=Math.max(0,1-Math.max(0,y-vh*.35)/(vh*.57)).toFixed(3); else hc.style.transform="translate3d(0,"+(-y*.12)+"px,0)"; }
     var rs=SL.map(function(el){ return el.getBoundingClientRect(); }), atEnd=y+vh>=document.documentElement.scrollHeight-4;
     SL.forEach(function(el,i){ var r=rs[i]; if(r.bottom<-200||r.top>vh+200) return; var k=atEnd?1:Math.max(0,Math.min(1,(vh-r.top)/(vh*.3))); el.style.transform="translate3d(0,"+((1-k)*64).toFixed(1)+"px,0)"; el.style.opacity=(0.18+0.82*k).toFixed(3); });
   }
@@ -2540,7 +2548,8 @@ document.addEventListener("keydown",function(e){ if(e.key!=="Escape") return; if
 addEventListener("hashchange",go);
 document.addEventListener("securitypolicyviolation",function(e){ if(/google/.test(e.blockedURI||"")) $$("iframe[data-map]").forEach(function(f){ f.remove(); }); });
 addEventListener("scroll",onScroll,{passive:true});
-addEventListener("resize",function(){ collectSL(); fitHero(); heroFit(); });
+var lastW=innerWidth;
+addEventListener("resize",function(){ if(touch && innerWidth===lastW) return; lastW=innerWidth; collectSL(); fitHero(); heroFit(); });
 setInterval(function(){ renderStatus(); refreshContacts(); renderDay(); renderCDay(); },60000);
 
 /* Boot */
