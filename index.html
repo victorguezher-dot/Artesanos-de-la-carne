@@ -2213,7 +2213,7 @@ function fillHero(base){
 /* If the headline doesn't fit on one line, break it where the slogan breaks instead of wherever the browser wraps */
 function fitHero(){ var h=$("#h1"); if(!h || !h.offsetWidth) return; h.classList.remove("br"); var avail=h.clientWidth; h.style.whiteSpace="nowrap"; var need=h.scrollWidth; h.style.whiteSpace=""; h.classList.toggle("br",need>avail+2); }
 /* phone: tell the hero photo where the switch sits (see .hbg.c on phones) */
-function heroFit(){ var h=$("#hero"), hc=$("#heroC"), sw=$(".hsw"); if(!h||!hc||!sw||!h.offsetHeight) return; h.style.setProperty("--st",(hc.offsetTop+sw.offsetTop)+"px"); }
+function heroFit(){ var h=$("#hero"), hc=$("#heroC"), sw=$(".hsw"); if(!h||!hc||!sw||!h.offsetHeight) return; var v=(hc.offsetTop+sw.offsetTop)+"px"; if(h._st===v) return; h._st=v; h.style.setProperty("--st",v); }
 function pressHB(){ $$(".hsw button").forEach(function(b){ b.setAttribute("aria-pressed",String(b.getAttribute("data-hsw")===hb)); }); }
 function warm(layer){ if(!layer || layer.classList.contains("warm")) return; var im=$("img",layer); if(im) im.loading="eager"; layer.classList.add("warm"); void getComputedStyle(layer).opacity; }
 function setHB(b){
@@ -2574,7 +2574,10 @@ addEventListener("hashchange",go);
 document.addEventListener("securitypolicyviolation",function(e){ if(/google/.test(e.blockedURI||"")) $$("iframe[data-map]").forEach(function(f){ f.remove(); }); });
 addEventListener("scroll",onScroll,{passive:true});
 var lastW=innerWidth;
-addEventListener("resize",function(){ if(touch && innerWidth===lastW) return; lastW=innerWidth; collectSL(); fitHero(); heroFit(); });
+addEventListener("resize",function(){ if(touch && innerWidth===lastW){ heroFit(); return; } lastW=innerWidth; collectSL(); fitHero(); heroFit(); });
+/* Some in-app browsers (the Google app on iPhone) change the height of the page itself when their bars slide away,
+   which moves the cover text: whenever the cover's own size changes, line the photo up with the switch again. */
+try{ new ResizeObserver(function(){ heroFit(); }).observe($("#hero")); }catch(e){}
 setInterval(function(){ renderStatus(); refreshContacts(); renderDay(); renderCDay(); },60000);
 
 /* Boot */
