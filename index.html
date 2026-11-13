@@ -1760,6 +1760,11 @@ html{background:#171310}
 @keyframes mqR{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
 @media (hover:hover) and (pointer:fine){.mq:hover .mq-t{animation-play-state:paused}}
 @media (prefers-reduced-motion:reduce){.mq-t{animation:none;flex-wrap:wrap;justify-content:center;width:auto;padding-inline:var(--gut)}.mq-t>*:nth-child(n+15){display:none}.mq{-webkit-mask-image:none;mask-image:none}}
+
+/* fixed-height covers on phones (see lockPH) */
+.phlock .ph{height:min(calc(var(--phv) * 62),600px)}
+.phlock .ph.ph-s{height:min(calc(var(--phv) * 42),420px)}
+.phlock .ph img{will-change:auto}
 </style>
 </head>
 <body>
@@ -3038,7 +3043,11 @@ addEventListener("hashchange",go);
 document.addEventListener("securitypolicyviolation",function(e){ if(/google/.test(e.blockedURI||"")) $$("iframe[data-map]").forEach(function(f){ f.remove(); }); });
 addEventListener("scroll",onScroll,{passive:true});
 var lastW=innerWidth;
-addEventListener("resize",function(){ if(touch && innerWidth===lastW){ heroFit(); return; } lastW=innerWidth; lockHero(true); collectSL(); fitHero(); heroFit(); });
+/* Phones: page cover photos take their height once, from the screen at load, so the browser bars sliding
+   in and out (iPhone, in-app browsers) never resize them and the photo never seems to zoom */
+function lockPH(){ if(!touch) return; document.documentElement.style.setProperty("--phv",(innerHeight/100).toFixed(2)+"px"); document.documentElement.classList.add("phlock"); }
+lockPH();
+addEventListener("resize",function(){ if(touch && innerWidth!==lastW) lockPH(); if(touch && innerWidth===lastW){ heroFit(); return; } lastW=innerWidth; lockHero(true); collectSL(); fitHero(); heroFit(); });
 /* Some in-app browsers (the Google app on iPhone) change the height of the page itself when their bars slide away,
    which moves the cover text: whenever the cover's own size changes, line the photo up with the switch again. */
 try{ new ResizeObserver(function(){ heroFit(); }).observe($("#hero")); }catch(e){}
