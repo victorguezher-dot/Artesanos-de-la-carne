@@ -1437,8 +1437,8 @@ html{background:#171310}
 
 /* ---------- Phones: nothing that has to be recomputed on every scroll frame ---------- */
 @media (hover:none) and (pointer:coarse),(max-width:760px){
-  /* paper grain: a pre-rendered tile on a layer of constant size (it used to be recomputed whenever the browser bar moved) */
-  body::after{mix-blend-mode:normal;opacity:.27;inset:auto;top:0;left:0;width:100%;height:100vh;height:100lvh;background-image:url("img/paper.webp");background-size:260px 260px}
+  /* paper grain: the same vector fibres, laid over the page without a full-screen multiply blend, on a layer of constant size */
+  body::after{mix-blend-mode:normal;opacity:.3;inset:auto;top:0;left:0;width:100%;height:100vh;height:100lvh;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .24 0 0 0 0 .18 0 0 0 0 .12 0 0 0 -.9 .62'/%3E%3C/filter%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .26 0 0 0 0 .2 0 0 0 0 .13 0 0 0 -1.6 .95'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='.22'/%3E%3C/svg%3E")}
   /* reveals keep their rise, fade and focus-in; only blocks that carry photos skip the blur (a large blurred photo is the costly part) */
   .js .rv:has(img):not(.in),.js .step.rv:has(img):not(.in){filter:none}
   /* floating bars: solid glass instead of live blur of the page behind them */
@@ -1469,6 +1469,15 @@ html{background:#171310}
   .sda .tour3 .ts:nth-child(2) img,.sda .tour3 .tbar i:nth-child(2) b{animation-range:contain 33.333% contain 66.667%}
   .sda .tour3 .ts:nth-child(3) img,.sda .tour3 .tbar i:nth-child(3) b{animation-range:contain 66.667% contain 100%}
 }
+
+/* ---------- Section title that builds itself once it is in view: label, then each word rising from its own mask
+   (the cover headline's language), then the divider and the paragraph. Time-based, so it never depends on scroll speed. ---------- */
+.js .wr .eyebrow{opacity:0;transform:translate3d(0,10px,0);transition:opacity .7s var(--ease),transform .8s var(--ease)}
+.js .wr h2 .w>span{display:inline-block;opacity:0;transform:translate3d(0,108%,0);transition:transform .95s cubic-bezier(.23,1,.32,1),opacity .5s cubic-bezier(.23,1,.32,1);transition-delay:calc(.14s + var(--i,0) * .07s)}
+.js .wr h2::after{opacity:0;transform:scaleX(.15);transition:opacity .6s ease .8s,transform 1s var(--ease) .8s}
+.js .wr .lead{opacity:0;transform:translate3d(0,18px,0);transition:opacity .8s var(--ease) .95s,transform .95s var(--ease) .95s}
+.js .wr.in .eyebrow,.js .wr.in h2 .w>span,.js .wr.in .lead{opacity:1;transform:none}
+.js .wr.in h2::after{opacity:1;transform:none}
 
 /* ---------- Footer credit ---------- */
 .foot .bot{align-items:center}
@@ -1547,9 +1556,9 @@ html{background:#171310}
 
   <section class="sec">
     <div class="wrap">
-      <div class="sh shc sl">
+      <div class="sh shc wr">
         <span class="eyebrow" data-i="casa.eb">Dos lugares en uno</span>
-        <h2 data-i-html="casa.h">En la mañana, La&nbsp;Higuera.<br>En la tarde, La&nbsp;Crianza.</h2>
+        <h2 data-wr data-i-html="casa.h">En la mañana, La&nbsp;Higuera.<br>En la tarde, La&nbsp;Crianza.</h2>
         <p class="lead" data-i="casa.p">Un mismo lugar en Teziutlán Sur 93: desayunos por la mañana, parrilla desde la 1:30 pm y nuestra carnicería aquí mismo.</p>
       </div>
       <div class="day rv" id="day">
@@ -2104,6 +2113,7 @@ function applyLang(){
   document.documentElement.lang=lang;
   $$("[data-i]").forEach(function(el){ el.textContent=t(el.getAttribute("data-i")); });
   $$("[data-i-html]").forEach(function(el){ el.innerHTML=t(el.getAttribute("data-i-html")); });
+  splitWR();
   $$("[data-i-ph]").forEach(function(el){ el.placeholder=t(el.getAttribute("data-i-ph")); });
   $$("[data-i-aria]").forEach(function(el){ el.setAttribute("aria-label",t(el.getAttribute("data-i-aria"))); });
   $$("[data-i-alt]").forEach(function(el){ el.alt=t(el.getAttribute("data-i-alt")); });
@@ -2170,6 +2180,17 @@ function renderFavs(){
 
 /* Hero headline: word-by-word reveal from behind an invisible edge */
 function playHero(){ var hc=$("#heroC"); if(!hc) return; hc.classList.remove("go","re"); void hc.offsetWidth; requestAnimationFrame(function(){ requestAnimationFrame(function(){ hc.classList.add("go","seen"); }); }); }
+/* Titles marked data-wr: each word gets its own mask so it can rise into place (redone after a language change) */
+function splitWR(){
+  $$("[data-wr]").forEach(function(h){
+    if(h.querySelector(".w")) return; var i=0, out="";
+    Array.prototype.forEach.call(h.childNodes,function(n){
+      if(n.nodeType===3) out+=n.textContent.split(/[ \n\t]+/).filter(Boolean).map(function(w){ return '<span class="w"><span style="--i:'+(i++)+'">'+esc(w)+'</span></span>'; }).join(" ")+" ";
+      else if(n.nodeName==="BR") out+="<br>"; else out+=n.outerHTML||"";
+    });
+    h.innerHTML=out.replace(/\s+$/,"");
+  });
+}
 function splitHero(l1,l2,base){
   var h=$("#h1"); if(!h) return;
   h.innerHTML=[l1,l2].map(function(line){ return line.split(" ").map(function(w){return '<span class="w"><span>'+esc(w)+'</span></span>';}).join(" "); }).join('<br class="hbr"> ');
@@ -2433,13 +2454,17 @@ function zoom(id,title,sub){
 }
 
 /* ---------- Reveal + scroll-linked titles ---------- */
-var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches, io=null;
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches, io=null, io2=null;
 function reveal(){
-  var els=$$(".page.on .rv:not(.in), .foot .rv:not(.in)");
-  if(reduce||!("IntersectionObserver" in window)){ els.forEach(function(e){e.classList.add("in");}); return; }
+  var els=$$(".page.on .rv:not(.in), .foot .rv:not(.in)"), wr=$$(".page.on .wr:not(.in)");
+  if(reduce||!("IntersectionObserver" in window)){ els.concat(wr).forEach(function(e){e.classList.add("in");}); return; }
+  /* self-building titles start a little later, once a good part of them is on screen */
+  io2=io2||new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io2.unobserve(e.target); } }); },{rootMargin:"0px 0px -12% 0px",threshold:.4});
+  wr.forEach(function(e){ io2.observe(e); });
   io=io||new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); },{rootMargin:"0px 0px -8% 0px"});
   els.forEach(function(e){ io.observe(e); });
   setTimeout(function(){ $$(".page.on .rv:not(.in)").forEach(function(e){ var r=e.getBoundingClientRect(); if(r.top<innerHeight&&r.bottom>0) e.classList.add("in"); }); },1400);
+  setTimeout(function(){ $$(".page.on .wr:not(.in)").forEach(function(e){ var r=e.getBoundingClientRect(); if(r.top<innerHeight*.7&&r.bottom>0) e.classList.add("in"); }); },1600);
   markLoaded();
 }
 function markLoaded(){ $$("img:not(.ld)").forEach(function(i){ if(i.complete && i.naturalWidth) i.classList.add("ld"); }); }
