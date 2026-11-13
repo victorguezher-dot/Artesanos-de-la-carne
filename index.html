@@ -2491,7 +2491,7 @@ var nosl=touch && !sda && !reduce;
    and its text does not react to the scroll. */
 var gsa=/\bGSA\//.test(navigator.userAgent) && /iP(hone|ad|od)/.test(navigator.userAgent);
 if(gsa) document.documentElement.classList.add("gsa");
-function lockHero(force){ if(!gsa) return; var h=$("#hero"); if(!h || (!force && h.style.height)) return; h.style.height=""; if(h.offsetHeight){ h.style.height=h.offsetHeight+"px"; heroFit(); } }
+function lockHero(force){ if(!gsa) return; var h=$("#hero"); if(!h || (!force && h.style.height)) return; var fz=[$("#heroC"),$("#hero .cue")]; fz.forEach(function(e){ if(e) e.style.bottom=""; }); h.style.height=""; if(h.offsetHeight){ h.style.height=h.offsetHeight+"px"; fz.forEach(function(e){ if(!e) return; var b=getComputedStyle(e).bottom; if(/^-?[\d.]+px$/.test(b)) e.style.bottom=b; }); heroFit(); } }
 if(nosl) document.documentElement.classList.add("nosl");
 function collectSL(){
   SL=(sda||nosl)?[]:$$(".page.on .sl");
