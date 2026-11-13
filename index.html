@@ -6,6 +6,7 @@
 <title>La Crianza 1939 · La Higuera · Teziutlán Sur 93, Puebla</title>
 <meta name="description" content="La Crianza 1939 y La Higuera, desayunos por La Crianza. Cortes a la parrilla, cocina mexicana, carnicería y desayunos en Teziutlán Sur 93, Col. La Paz, Puebla.">
 <meta name="theme-color" content="#15120f">
+<meta name="color-scheme" content="light dark">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya:ital,wght@1,500&family=Arapey:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap">
@@ -683,7 +684,7 @@ html.nvh .mi{transform:translateY(calc(-1 * var(--navh) - 10px))}
   --live:#5e7a2c; --liver:rgba(94,122,44,.16);
   --kraft:#dcc6a1; --peach:#f3dcc3; --iron:#1e1915;
   --print:0 0 0 1px rgba(42,33,26,.09),0 1px 0 rgba(255,255,255,.7) inset,0 26px 40px -30px rgba(58,38,18,.6),0 4px 10px -4px rgba(58,38,18,.22);
-  color-scheme:light;
+  color-scheme:light dark;
 }
 /* Dark islands keep the evening palette: hero, nav, photo overlays, footer, overlays, wood */
 .hero,.nav,.ov,.ph,.foot,.zx,.sheet,.waf,.curtain,.isl,.casa .inf,.mapcard,.lugar figcaption,.wood{
@@ -1486,11 +1487,16 @@ html{background:#171310}
 @media (hover:hover) and (pointer:fine){.foot .gz:hover{color:var(--cream)}}
 .gz:focus-visible{outline:2px solid var(--brass2);outline-offset:4px;border-radius:4px}
 
+.nosl .tbar b{transition:transform .5s var(--ease)}
+
 /* ---------- Phone menu: the carta runs edge to edge ---------- */
 @media (max-width:760px){
   #list{margin-inline:calc(-1 * max(var(--gut),env(safe-area-inset-left,0px)));padding-inline:max(var(--gut),env(safe-area-inset-left,0px));border-radius:0;box-shadow:none}
   #list::before{inset:6px 0;border-left:0;border-right:0}
 }
+/* This site carries its own dark and light surfaces and must look the same in the phone's light and dark modes.
+   Declaring a dark-scheme rule (together with the color-scheme meta) is the standard way to say "do not auto-darken me". */
+@media (prefers-color-scheme:dark){:root{--scheme:dark}}
 </style>
 </head>
 <body>
@@ -2476,7 +2482,15 @@ var SL=[], touch=matchMedia("(hover:none) and (pointer:coarse)").matches, sda=fa
    section titles, the cover text, the photo zoom and progress bars of the pinned tours. Elsewhere the script keeps driving it. */
 try{ sda=touch && !reduce && !!window.CSS && CSS.supports("animation-timeline: view()") && CSS.supports("animation-range: cover 0% cover 30vh"); }catch(e){ sda=false; }
 if(sda) document.documentElement.classList.add("sda");
-function collectSL(){ SL=sda?[]:$$(".page.on .sl"); tick(); }
+/* Phones without them (iPhone before iOS 26): nothing follows the scroll. Section titles use the ordinary one-shot reveal,
+   the cover text stays put, the tour photos don't zoom and its progress bars fill a step at a time. */
+var nosl=touch && !sda && !reduce;
+if(nosl) document.documentElement.classList.add("nosl");
+function collectSL(){
+  SL=(sda||nosl)?[]:$$(".page.on .sl");
+  if(nosl){ var add=false; $$(".page.on .sl:not(.rv)").forEach(function(e){ e.classList.add("rv"); add=true; }); if(add) reveal(); }
+  tick();
+}
 var ticking=false, lastY=0;
 function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(tick); } }
 function tick(){
@@ -2484,7 +2498,7 @@ function tick(){
   if(!reduce){
     var hc=route==="inicio"?$("#heroC"):null;
     if(route==="inicio"||route==="nosotros") tourTick(vh);
-    if(hc && !sda && y<vh*1.2){ if(touch) hc.style.opacity=Math.max(0,1-Math.max(0,y-vh*.35)/(vh*.57)).toFixed(3); else hc.style.transform="translate3d(0,"+(-y*.12)+"px,0)"; }
+    if(hc && !sda && !nosl && y<vh*1.2){ hc.style.transform="translate3d(0,"+(-y*.12)+"px,0)"; }
     var rs=SL.map(function(el){ return el.getBoundingClientRect(); }), atEnd=y+vh>=document.documentElement.scrollHeight-4;
     SL.forEach(function(el,i){ var r=rs[i]; if(r.bottom<-200||r.top>vh+200) return; var k=atEnd?1:Math.max(0,Math.min(1,(vh-r.top)/(vh*.3))); el.style.transform="translate3d(0,"+((1-k)*64).toFixed(1)+"px,0)"; el.style.opacity=(0.18+0.82*k).toFixed(3); });
   }
@@ -2515,6 +2529,7 @@ function tourTick(vh){
     if(!t._s) t._s={TS:$$(".ts",t),TC:$$(".tcap",t),TB:$$(".tbar b",t),i:0};
     var S=t._s, n=S.TS.length, total=Math.max(1,t.offsetHeight-vh), p=Math.max(0,Math.min(1,-r.top/total)), f=p*n, i=Math.min(n-1,Math.floor(f));
     if(i!==S.i){ S.i=i; S.TS.forEach(function(e,k){ e.classList.toggle("on",k===i); }); S.TC.forEach(function(e,k){ e.classList.toggle("on",k===i); }); }
+    if(nosl){ if(S.b!==i){ S.b=i; S.TB.forEach(function(e,k){ e.style.transform=k<=i?"none":""; }); } return; }
     S.TS.forEach(function(e,k){ var l=Math.max(0,Math.min(1,f-k)); if(sda) return; if(!reduce){ var im=e.querySelector("img"); if(im) im.style.transform="scale("+(1+.1*l).toFixed(4)+")"; } S.TB[k].style.transform="scaleX("+l.toFixed(4)+")"; });
   });
 }
