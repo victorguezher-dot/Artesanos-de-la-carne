@@ -26,7 +26,6 @@ d.setAttribute("data-hb",b);[["l","(min-width:761px)"],["p","(max-width:760px)"]
 <meta property="og:url" content="https://victorguezher-dot.github.io/Artesanos-de-la-carne/">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 /* La Crianza 1939 · dark warm wood, green walls and amber light, taken from the restaurant's own photos. */
@@ -1499,6 +1498,268 @@ html{background:#171310}
 /* This site carries its own dark and light surfaces and must look the same in the phone's light and dark modes.
    Declaring a dark-scheme rule (together with the color-scheme meta) is the standard way to say "do not auto-darken me". */
 @media (prefers-color-scheme:dark){:root{--scheme:dark}}
+
+/* ===================== Reservar ===================== */
+.rpk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.6vw,18px);max-width:860px;margin:clamp(40px,4.4vw,60px) auto clamp(18px,2vw,26px)}
+.rp{position:relative;display:grid;justify-items:center;align-content:start;gap:12px;padding:clamp(22px,2.6vw,32px) 16px clamp(20px,2.2vw,26px);border:0;border-radius:16px;font:inherit;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  box-shadow:0 24px 36px -30px rgba(20,14,10,.6);opacity:.72;transform:scale(.975);transition:opacity .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease)}
+.rp::before{content:"";position:absolute;inset:7px;border-radius:11px;border:1px solid var(--cbl);pointer-events:none}
+.rp[aria-pressed="true"]{opacity:1;transform:none;box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--brass2),0 30px 44px -30px rgba(20,14,10,.7)}
+.rp:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){.rp[aria-pressed="false"]:hover{opacity:.92;transform:translateY(-2px)}}
+.rp:focus-visible{outline:2px solid var(--brass2);outline-offset:6px}
+.rp.h{--cbl:rgba(113,109,49,.22);background:#f2edd3;color:#3f3d18;font-family:"Space Grotesk",var(--f-b)}
+.rp.c{--cbl:rgba(220,218,141,.28);background:linear-gradient(180deg,#1f2e2d,#192625);color:#efe9cf}
+.rp-lg{height:auto}
+.rp.h .rp-lg{width:min(200px,78%);margin-top:8px;filter:brightness(0) saturate(100%) invert(38%) sepia(23%) saturate(890%) hue-rotate(22deg) brightness(.85)}
+.rp.c .rp-lg{width:min(132px,52%)}
+.rp-d{font-size:15px;line-height:1.35}
+.rp.h .rp-d{font-weight:500;color:#5f5b28}
+.rp.c .rp-d{font:italic 400 17px/1.35 Arapey,Georgia,serif;color:#cdc7aa}
+.rp .chip{font-size:12.5px;padding:7px 12px}
+.rp.h .chip{background:rgba(113,109,49,.08);box-shadow:inset 0 0 0 1px rgba(113,109,49,.28);color:#3f3d18}
+.rp.c .chip{background:rgba(0,0,0,.22);box-shadow:inset 0 0 0 1px rgba(220,218,141,.25);color:#efe9cf}
+.rp-ok{position:absolute;z-index:1;top:14px;right:14px;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--brass2);color:#fff;opacity:0;transform:scale(.6);transition:opacity .2s cubic-bezier(.23,1,.32,1),transform .25s cubic-bezier(.23,1,.32,1)}
+.rp-ok svg{width:13px;height:13px}
+.rp[aria-pressed="true"] .rp-ok{opacity:1;transform:none}
+
+/* themed surfaces: the booking box and the event panel wear the chosen restaurant */
+.rbx,.evp{--pb:#f2edd3;--pi:#3f3d18;--pm:#5f5b28;--pa:#716d31;--pbtn:#cfdcae;--pbtnt:#3b4419;--pl:rgba(113,109,49,.24);--pt:rgba(113,109,49,.07);--pc:rgba(255,253,244,.55);--pf:"Space Grotesk",var(--f-b);--pchat:#efeae2;--pbub:#d9fdd3;--pbubt:#111b21;color-scheme:light}
+.rbx[data-rest="crianza"],.evp[data-rest="crianza"]{--pb:#1f2e2d;--pi:#efe9cf;--pm:#cdc7aa;--pa:#dcda8d;--pbtn:#dcda8d;--pbtnt:#1f2e2d;--pl:rgba(220,218,141,.26);--pt:rgba(239,233,207,.06);--pc:rgba(0,0,0,.16);--pf:var(--f-b);--pchat:#0b141a;--pbub:#005c4b;--pbubt:#e9edef;color-scheme:dark}
+.rbx{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);max-width:1100px;margin:0 auto;border-radius:18px;background:var(--pb);color:var(--pi);font-family:var(--pf);box-shadow:0 34px 50px -36px rgba(20,14,10,.65);transition:background-color .5s var(--ease),color .5s var(--ease)}
+.rbx::before,.evp::before{content:"";position:absolute;inset:8px;border-radius:12px;border:1px solid var(--pl);pointer-events:none}
+.rbx>*{position:relative;z-index:1}
+.rk-l{display:block;font:500 11.5px/1 var(--f-b);letter-spacing:.24em;text-transform:uppercase;color:var(--pa)}
+.rbx h3,.evp h3{margin-top:10px;font:500 clamp(26px,2.4vw,32px)/1.08 var(--f-d);color:var(--pi)}
+.rbx[data-rest="higuera"] h3,.evp[data-rest="higuera"] h3{font:700 clamp(24px,2.2vw,30px)/1.1 "Space Grotesk",var(--f-b);letter-spacing:-.01em}
+.rway{display:grid;align-content:start;gap:14px;padding:clamp(22px,2.6vw,36px)}
+.rway p{margin:0;color:var(--pm);font-size:16px;line-height:1.5}
+.rw-ph{aspect-ratio:16/10;border-radius:10px;overflow:hidden;background:rgba(0,0,0,.1);margin-bottom:6px}
+.rw-ph img{width:100%;height:100%;object-fit:cover}
+.rway .btn{margin-top:6px}
+.rw-or{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px;margin-top:8px;padding-top:16px;border-top:1px solid var(--pl);font-size:15px;color:var(--pm)}
+.rw-or a{display:inline-flex;align-items:center;min-height:44px;font:500 22px/1 var(--f-d);color:var(--pi);text-decoration:none;font-variant-numeric:tabular-nums}
+.rfm{padding:clamp(22px,2.6vw,36px);border-left:1px solid var(--pl)}
+.rbx .btn,.evp .btn{color:var(--pi);background:var(--pt);box-shadow:inset 0 0 0 1px var(--pl);font-family:var(--pf)}
+.rbx .btn.pri,.evp .btn.pri{background:var(--pbtn);color:var(--pbtnt);box-shadow:none}
+.rbx .btn .ic,.evp .btn .ic{background:var(--pt)}
+.rbx .btn.pri .ic,.evp .btn.pri .ic{background:rgba(0,0,0,.08)}
+@media (hover:hover) and (pointer:fine){.rbx .btn:hover,.evp .btn:hover{background-color:var(--pc)}.rbx .btn.pri:hover,.evp .btn.pri:hover{background-color:var(--pbtn);filter:brightness(1.05)}}
+.rf-go .ic{color:#25d366}
+.rbx .rf-go .ic,.evp .rf-go .ic{background:rgba(0,0,0,.14)}
+.fld{display:block;margin-top:22px}
+.fl-l{display:block;margin-bottom:10px;font:500 11.5px/1.2 var(--f-b);letter-spacing:.2em;text-transform:uppercase;color:var(--pa)}
+.fl-l em{font-style:normal;letter-spacing:.08em;text-transform:none;opacity:.8}
+.fld.two{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px 22px;align-items:end}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border:0;border-radius:999px;background:var(--pt);box-shadow:inset 0 0 0 1px var(--pl);color:var(--pi);font:500 15px/1.1 var(--pf);font-variant-numeric:tabular-nums;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .16s ease,color .16s ease,transform .12s ease}
+.opt:active{transform:scale(.96)}
+.opt[aria-pressed="true"]{background:var(--pbtn);color:var(--pbtnt);box-shadow:none}
+@media (hover:hover) and (pointer:fine){.opt[aria-pressed="false"]:hover{background:var(--pc)}}
+.opt:focus-visible,.stp button:focus-visible,.rbx input:focus-visible,.evp input:focus-visible{outline:2px solid var(--pa);outline-offset:2px}
+.opt.dy{flex-direction:column;gap:4px;min-width:68px;min-height:58px;padding:8px 12px;border-radius:14px}
+.opt.dy small{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+.opt.dy b{font-size:16px;font-weight:600}
+.stp{display:inline-flex;align-items:center;border-radius:999px;box-shadow:inset 0 0 0 1px var(--pl);background:var(--pt)}
+.stp button{width:46px;height:46px;border:0;border-radius:50%;background:none;color:var(--pi);font:400 22px/1 var(--f-b);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .16s ease,transform .12s ease}
+.stp button:active{transform:scale(.92)}
+@media (hover:hover) and (pointer:fine){.stp button:hover{background:var(--pc)}}
+.stp output{min-width:40px;text-align:center;font:600 19px/1 var(--pf);font-variant-numeric:tabular-nums}
+.rbx input,.evp input{display:block;width:100%;min-height:48px;padding:0 16px;border:0;border-radius:12px;background:var(--pt);box-shadow:inset 0 0 0 1px var(--pl);color:var(--pi);font:500 16px/1.2 var(--pf)}
+.rbx input::placeholder,.evp input::placeholder{color:var(--pm);opacity:.75}
+.rf-big{margin:14px 0 0;font-size:15px;color:var(--pm)}
+.rf-big a{color:var(--pi);text-underline-offset:3px}
+.rf-pv{margin-top:26px}
+.chat{display:flex;justify-content:flex-end;padding:14px;border-radius:12px;background:var(--pchat)}
+.bub{position:relative;max-width:min(100%,40ch);padding:10px 12px 11px;border-radius:12px 4px 12px 12px;background:var(--pbub);color:var(--pbubt);font:400 14.5px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;white-space:pre-line;overflow-wrap:anywhere;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+.bub::after{content:"";position:absolute;top:0;right:-7px;border-style:solid;border-width:0 0 9px 8px;border-color:transparent transparent transparent var(--pbub)}
+.rf-go{width:100%;margin-top:18px}
+.rf-n{margin:10px 0 0;text-align:center;font-size:13.5px;color:var(--pm)}
+
+/* events */
+.rs-ev{padding-top:0}
+.evc{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 14px;max-width:900px;margin:30px auto 0}
+.evc-l{font:italic 400 20px/1.3 Arapey,Georgia,serif;color:var(--brass2)}
+.evc-t{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.tag{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:999px;background:var(--tint);box-shadow:inset 0 0 0 1px var(--hair2);font-size:14.5px;color:var(--cream2)}
+.evw{margin-top:clamp(36px,4vw,52px)}
+.evp{position:relative;padding:clamp(24px,3.2vw,46px);border-radius:18px;background:var(--pb);color:var(--pi);font-family:var(--pf);box-shadow:0 34px 50px -36px rgba(20,14,10,.65);transition:background-color .5s var(--ease),color .5s var(--ease)}
+.evp>*{position:relative;z-index:1}
+.evp-top{display:flex;align-items:center;gap:clamp(18px,2.4vw,30px)}
+.evl{display:none;flex:none;height:auto}
+.evp[data-rest="higuera"] .evl.h{display:block;width:clamp(150px,16vw,210px);filter:brightness(0) saturate(100%) invert(38%) sepia(23%) saturate(890%) hue-rotate(22deg) brightness(.85)}
+.evp[data-rest="crianza"] .evl.c{display:block;width:clamp(96px,10vw,126px)}
+.evp-top h3{margin:0}
+.evp-top p{margin:8px 0 0;max-width:60ch;color:var(--pm);font-size:16px}
+.pks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:clamp(24px,3vw,34px)}
+.pkc{display:flex;flex-direction:column;padding:22px 20px 20px;border-radius:12px;background:var(--pc);box-shadow:inset 0 0 0 1px var(--pl);transition:box-shadow .25s ease}
+.pkc.on{box-shadow:inset 0 0 0 2px var(--pa)}
+.pk-n{font:500 22px/1 var(--f-d);letter-spacing:.06em;color:var(--pa)}
+.evp[data-rest="higuera"] .pk-n{font:600 24px/1 "Space Grotesk",var(--f-b);letter-spacing:-.01em;color:#cf585f}
+.pk-p{display:flex;align-items:baseline;gap:8px;margin-top:14px}
+.pk-p b{font:500 38px/1 var(--f-d);font-variant-numeric:tabular-nums;color:var(--pi)}
+.evp[data-rest="higuera"] .pk-p b{font:700 34px/1 "Space Grotesk",var(--f-b)}
+.pk-p small{font-size:13.5px;color:var(--pm)}
+.pk-h{margin-top:16px;font:500 11px/1.2 var(--f-b);letter-spacing:.18em;text-transform:uppercase;color:var(--pa)}
+.pkc ul{list-style:none;margin:14px 0 20px;padding:0}
+.pkc li{position:relative;padding:8px 0 8px 18px;font-size:15px;line-height:1.4;border-top:1px dashed var(--pl)}
+.pkc li:first-child{border-top:0}
+.pkc li::before{content:"";position:absolute;left:2px;top:15px;width:6px;height:6px;transform:rotate(45deg);background:var(--pa);opacity:.8}
+.evp[data-rest="higuera"] .pkc ul{border-left:3px solid #cf585f;margin-top:12px}
+.evp[data-rest="higuera"] .pkc li{padding-left:14px;border-top:0;font-weight:500}
+.evp[data-rest="higuera"] .pkc li::before{display:none}
+.pk-go{width:100%;margin-top:auto;min-height:48px;font-size:15px}
+.evx{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:14px;margin-top:14px}
+.exb{padding:22px 20px;border-radius:12px;background:var(--pc);box-shadow:inset 0 0 0 1px var(--pl)}
+.exb .inc{margin:0 0 22px;font-size:17px;line-height:1.45;font-weight:500;color:var(--pi)}
+.exb .sub{margin:-2px 0 10px;font-size:14.5px;color:var(--pm)}
+.prs{list-style:none;margin:0;padding:0}
+.pr{display:grid;grid-template-columns:auto minmax(12px,1fr) auto;align-items:baseline;column-gap:8px;padding:7px 0}
+.pr span{font-size:15.5px}
+.pr i{border-bottom:1px dotted var(--pl);transform:translateY(-4px)}
+.pr b{font-weight:600;font-variant-numeric:tabular-nums}
+.pr small{grid-column:1/-1;font-size:12.5px;color:var(--pm);margin-top:2px}
+.trm{list-style:none;margin:0;padding:0}
+.trm li{position:relative;padding:6px 0 6px 16px;font-size:14.5px;line-height:1.45;color:var(--pm)}
+.trm li::before{content:"";position:absolute;left:2px;top:15px;width:5px;height:5px;border-radius:50%;background:var(--pa)}
+.evf{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(22px,3vw,40px);margin-top:14px;padding:clamp(22px,2.8vw,34px);border-radius:12px;background:var(--pc);box-shadow:inset 0 0 0 1px var(--pl);scroll-margin-top:100px}
+.evf .rf-h h3{margin-top:10px}
+.evf-b{align-self:end}
+.evf .fld.two{grid-template-columns:minmax(0,1fr) auto}
+.rbx input[type="date"],.evp input[type="date"]{min-width:0;-webkit-appearance:none;appearance:none}
+
+@media (max-width:1000px){
+  .pks{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .evx{grid-template-columns:1fr 1fr}.evx .exb:last-child{grid-column:1/-1}
+  .evf{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .rbx{grid-template-columns:1fr}
+  .rfm{border-left:0;border-top:1px solid var(--pl)}
+  .rw-ph{aspect-ratio:16/8}
+}
+@media (max-width:760px){
+  .rpk{gap:10px;margin-top:32px}
+  .rp{padding:18px 8px 16px;gap:10px;border-radius:14px}
+  .rp.h .rp-lg{width:min(150px,86%);margin-top:6px}
+  .rp.c .rp-lg{width:min(96px,62%)}
+  .rp-d{font-size:13px}.rp.c .rp-d{font-size:14.5px}
+  .rp .chip{font-size:11.5px;padding:6px 10px;justify-content:center;text-align:center}
+  .rp-ok{top:10px;right:10px;width:24px;height:24px}
+  .rway,.rfm{padding:22px 18px}
+  .opts.sc{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;margin-inline:-18px;padding:2px 18px 6px;scrollbar-width:none}
+  .opts.sc::-webkit-scrollbar{display:none}
+  .opts.sc .opt{flex:none;scroll-snap-align:start}
+  .evp{padding:22px 16px;border-radius:16px}
+  .evp-top{flex-direction:column;align-items:flex-start;gap:14px}
+  .pks{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-inline:-16px;padding:2px 16px 8px;scrollbar-width:none}
+  .pks::-webkit-scrollbar{display:none}
+  .pkc{flex:0 0 80%;scroll-snap-align:start}
+  .evx{grid-template-columns:1fr}
+  .evf{padding:20px 16px}
+}
+@media (max-width:420px){
+  .fld.two,.evf .fld.two{grid-template-columns:1fr}
+  .stp{width:max-content}
+}
+@media (prefers-reduced-motion:reduce){.rp,.rp-ok,.opt,.rbx,.evp{transition:none}}
+
+/* booking card: photo + online booking, figs on La Higuera */
+.rbx{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);max-width:1040px;overflow:hidden}
+.rb-ph{position:relative;z-index:1;margin:clamp(14px,1.6vw,18px);margin-right:0;min-height:340px;border-radius:10px;overflow:hidden;background:rgba(0,0,0,.12)}
+.rb-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rb-c{display:grid;align-content:center;justify-items:start;gap:14px;padding:clamp(28px,3.4vw,52px)}
+.rb-c h3{margin:0}
+.rb-c p{margin:0;max-width:44ch;color:var(--pm);font-size:16.5px;line-height:1.55}
+.rb-c .rb-hr{display:inline-flex;align-items:center;gap:10px;font-size:14.5px;color:var(--pi);font-weight:500}
+.rb-c .rb-hr::before{content:"";width:18px;height:1px;background:var(--pa)}
+.rb-go{min-width:min(100%,300px);margin-top:6px}
+.rb-more{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;width:100%;margin-top:10px;padding-top:18px;border-top:1px solid var(--pl)}
+.rb-more div{display:grid;gap:2px;font-size:14.5px;color:var(--pm)}
+.rb-more a{display:inline-flex;align-items:center;min-height:44px;width:max-content;color:var(--pi);font-weight:600;font-size:16px;text-decoration:underline;text-decoration-color:var(--pl);text-underline-offset:5px}
+.rb-more a#rbTel{font:500 22px/1 var(--f-d);text-decoration:none;font-variant-numeric:tabular-nums}
+.rbx[data-rest="higuera"] .rb-more a#rbTel{font:700 20px/1 "Space Grotesk",var(--f-b)}
+.rbx::after{content:"";position:absolute;z-index:0;pointer-events:none;right:-34px;top:-40px;width:120px;height:150px;transform:rotate(-150deg);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 124'%3E%3Cpath fill='%23cf585f' d='M50 2C55 9 59 17 66 23C88 33 100 55 100 78C100 104 78 122 50 122C22 122 0 104 0 78C0 55 12 33 34 23C41 17 45 9 50 2Z'/%3E%3C/svg%3E") no-repeat center/contain;opacity:0;transition:opacity .4s ease}
+.rbx[data-rest="higuera"]::after{opacity:.95}
+.rb-c::after{content:"";position:absolute;pointer-events:none;right:-38px;bottom:-56px;width:124px;height:152px;transform:rotate(22deg);z-index:-1;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 124'%3E%3Cpath fill='%23716d31' d='M50 2C55 9 59 17 66 23C88 33 100 55 100 78C100 104 78 122 50 122C22 122 0 104 0 78C0 55 12 33 34 23C41 17 45 9 50 2Z'/%3E%3C/svg%3E") no-repeat center/contain;opacity:0;transition:opacity .4s ease}
+.rbx[data-rest="higuera"] .rb-c::after{opacity:.85}
+.rb-c{position:relative;isolation:isolate}
+.rbx .rb-fig{display:none}
+.evp-top{flex-wrap:wrap}
+.evp-tx{flex:1;min-width:240px}
+.evp .evp-sw{align-self:center;flex:none;min-height:50px;font-size:15px;transition:transform .14s var(--ease),filter .2s ease}
+.evp .evp-sw b{font-weight:700}
+.evp .evp-sw.h{background:#f2edd3;color:#3f3d18;box-shadow:inset 0 0 0 1px rgba(113,109,49,.35);font-family:"Space Grotesk",var(--f-b)}
+.evp .evp-sw.h .ic{background:#cfdcae;color:#3b4419}
+.evp .evp-sw.c{background:#1f2e2d;color:#efe9cf;box-shadow:inset 0 0 0 1px rgba(220,218,141,.35);font-family:var(--f-b)}
+.evp .evp-sw.c b{font:500 17px/1 var(--f-d);letter-spacing:.03em}
+.evp .evp-sw.c .ic{background:#dcda8d;color:#1f2e2d}
+@media (hover:hover) and (pointer:fine){.evp .evp-sw.h:hover{background:#f2edd3;filter:brightness(1.03)}.evp .evp-sw.c:hover{background:#1f2e2d;filter:brightness(1.15)}}
+.evp-sw:focus-visible{outline:2px solid var(--brass2);outline-offset:3px}
+@media (max-width:860px){
+  .rbx{grid-template-columns:minmax(0,1fr)}
+  .rb-ph{margin:14px 14px 0;min-height:0;aspect-ratio:16/10}
+  .rb-c{padding:24px 20px 26px}
+  .rb-go{width:100%}
+}
+@media (max-width:420px){.rb-more{grid-template-columns:1fr}}
+
+.exb .unit{margin:10px 0 0;font-size:12.5px;letter-spacing:.04em;color:var(--pm)}
+.rp{grid-template-columns:minmax(0,1fr)}
+.rp .chip{width:auto;max-width:100%}
+
+.evp{overflow:hidden;isolation:isolate}
+.evp::after{content:"";position:absolute;z-index:0;pointer-events:none;right:-44px;bottom:-58px;width:140px;height:172px;transform:rotate(-30deg);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 124'%3E%3Cpath fill='%23cf585f' d='M50 2C55 9 59 17 66 23C88 33 100 55 100 78C100 104 78 122 50 122C22 122 0 104 0 78C0 55 12 33 34 23C41 17 45 9 50 2Z'/%3E%3C/svg%3E") no-repeat center/contain;opacity:0;transition:opacity .4s ease}
+.evp[data-rest="higuera"]::after{opacity:.95}
+.evf{position:relative;isolation:isolate}
+.evf::after{content:"";position:absolute;z-index:-1;pointer-events:none;right:-34px;top:-46px;width:110px;height:136px;transform:rotate(-155deg);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 124'%3E%3Cpath fill='%23716d31' d='M50 2C55 9 59 17 66 23C88 33 100 55 100 78C100 104 78 122 50 122C22 122 0 104 0 78C0 55 12 33 34 23C41 17 45 9 50 2Z'/%3E%3C/svg%3E") no-repeat center/contain;opacity:0;transition:opacity .4s ease}
+.evp[data-rest="higuera"] .evf::after{opacity:.85}
+.evf{overflow:hidden}
+.evp[data-rest="higuera"] .pkc:nth-child(2){position:relative;overflow:hidden;isolation:isolate}
+.evp[data-rest="higuera"] .pkc:nth-child(2)::after{content:"";position:absolute;z-index:-1;right:-28px;top:-36px;width:78px;height:96px;transform:rotate(-150deg);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 124'%3E%3Cpath fill='%23cf585f' d='M50 2C55 9 59 17 66 23C88 33 100 55 100 78C100 104 78 122 50 122C22 122 0 104 0 78C0 55 12 33 34 23C41 17 45 9 50 2Z'/%3E%3C/svg%3E") no-repeat center/contain;opacity:.9;pointer-events:none}
+.evp[data-rest="higuera"] .pkc:nth-child(4){position:relative;overflow:hidden;isolation:isolate}
+.evp[data-rest="higuera"] .pkc:nth-child(4)::after{content:"";position:absolute;z-index:-1;right:-30px;top:-38px;width:80px;height:98px;transform:rotate(-160deg);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 124'%3E%3Cpath fill='%23716d31' d='M50 2C55 9 59 17 66 23C88 33 100 55 100 78C100 104 78 122 50 122C22 122 0 104 0 78C0 55 12 33 34 23C41 17 45 9 50 2Z'/%3E%3C/svg%3E") no-repeat center/contain;opacity:.85;pointer-events:none}
+@media (max-width:760px){.evp .evp-sw{width:100%}}
+.evsw{display:flex;gap:6px;padding-left:clamp(10px,2vw,22px)}
+.evt{position:relative;display:grid;gap:3px;justify-items:start;min-height:58px;padding:13px 22px 12px;border:0;border-radius:14px 14px 0 0;font:inherit;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .3s var(--ease),background-color .3s var(--ease)}
+.evt::before{content:"";position:absolute;left:14px;right:14px;top:0;height:3px;border-radius:0 0 3px 3px;background:var(--a);opacity:0;transform:scaleX(.4);transition:opacity .25s ease,transform .35s var(--ease)}
+.evt b{font-size:19px;line-height:1.05}
+.evt span{font-size:13px;opacity:.85}
+.evt.h{--a:#cf585f;background:#f2edd3;color:#3f3d18;font-family:"Space Grotesk",var(--f-b)}
+.evt.h b{font-weight:700;letter-spacing:-.01em}
+.evt.c{--a:#dcda8d;background:#1f2e2d;color:#efe9cf}
+.evt.c b{font:500 20px/1.05 var(--f-d);letter-spacing:.03em}
+.evt[aria-pressed="false"]{opacity:.55}
+.evt[aria-pressed="true"]::before{opacity:1;transform:none}
+@media (hover:hover) and (pointer:fine){.evt[aria-pressed="false"]:hover{opacity:.8}}
+.evt:focus-visible{outline:2px solid var(--brass2);outline-offset:3px}
+@media (max-width:760px){
+  .evsw{padding-left:0}
+  .evt{flex:1;padding:12px 14px 11px;min-height:56px}
+  .evt b{font-size:17px}.evt.c b{font-size:18px}
+  .evt span{font-size:12px}
+  .evp{border-radius:0 0 16px 16px}
+}
+.evp{border-top-left-radius:0}
+
+@media (max-width:760px){
+  .split{max-width:430px}
+  .split .btn{padding:6px 6px 6px 13px;gap:6px;font-size:15px;min-height:52px}
+  .split .btn+.btn{margin-left:3px}
+  .split .btn{white-space:nowrap}
+}
+
+
+/* celebrations: a strip that runs to the right */
+.evc{display:block;max-width:none;text-align:center}
+.evc-l{display:block;margin-bottom:16px}
+.mq{display:block;overflow:hidden;margin-inline:calc(-1 * max(var(--gut),env(safe-area-inset-left,0px)));-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mq-t{display:flex;align-items:center;gap:14px;width:max-content;padding:4px 0;animation:mqR 46s linear infinite;will-change:transform}
+.mq-t .tag{flex:none;min-height:40px;padding:0 18px;font-size:15.5px;white-space:nowrap}
+.mq-t .dia{flex:none;width:6px;height:6px;transform:rotate(45deg);background:var(--brass2);opacity:.55}
+@keyframes mqR{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
+@media (hover:hover) and (pointer:fine){.mq:hover .mq-t{animation-play-state:paused}}
+@media (prefers-reduced-motion:reduce){.mq-t{animation:none;flex-wrap:wrap;justify-content:center;width:auto;padding-inline:var(--gut)}.mq-t>*:nth-child(n+15){display:none}.mq{-webkit-mask-image:none;mask-image:none}}
 </style>
 </head>
 <body>
@@ -1507,6 +1768,7 @@ html{background:#171310}
   <nav class="links" aria-label="Principal">
     <a href="#/" data-r="inicio" data-i="nav.inicio">Inicio</a>
     <a href="#/menu" data-r="menu" data-i="nav.menu">Menú</a>
+    <a href="#/reservar" data-r="reservar" data-i="nav.res">Reservar</a>
     <a href="#/nosotros" data-r="nosotros" data-i="nav.nos">Nosotros</a>
     <a href="#/contacto" data-r="contacto" data-i="nav.contacto">Contacto</a>
   </nav>
@@ -1522,6 +1784,7 @@ html{background:#171310}
   <nav>
     <a href="#/" data-r="inicio" data-i="nav.inicio">Inicio</a>
     <a href="#/menu" data-r="menu" data-i="nav.menu">Menú</a>
+    <a href="#/reservar" data-r="reservar" data-i="nav.res">Reservar</a>
     <a href="#/nosotros" data-r="nosotros" data-i="nav.nos">Nosotros</a>
     <a href="#/contacto" data-r="contacto" data-i="nav.contacto">Contacto</a>
   </nav>
@@ -1553,7 +1816,7 @@ html{background:#171310}
         <div class="hrow">
         <div class="split">
           <a class="btn" id="hmenu" href="#/menu/crianza"><span id="hmenuT">Ver menú</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
-          <a class="btn pri" id="hcall" data-tel="crianza" href="tel:+522212546202"><span data-i="call">Llamar</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3.2l1.6 4-2.1 1.3a11 11 0 0 0 5 5l1.3-2.1 4 1.6V17a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span></a>
+          <a class="btn pri" id="hres" href="#/reservar/crianza"><span data-i="nav.res">Reservar</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span></a>
         </div>
         <div class="chips"><span class="chip" id="hstat" data-card="crianza" data-long><span class="dot"></span><span class="st"></span></span></div>
         </div>
@@ -1845,6 +2108,73 @@ html{background:#171310}
     </div>
   </section>
 </section>
+<section class="page" data-page="reservar">
+  <div class="ph ph-s"><img src="img/l/H29.webp" alt="" style="object-position:46% 38%"><div class="t"><div class="wrap"><h1 data-i="nav.res2">Reservaciones</h1><span class="k" data-i="rs.k">Tu mesa o tu evento, en Teziutlán Sur 93</span></div></div></div>
+
+  <section class="sec rs-sec">
+    <div class="wrap">
+      <div class="sh shc wr"><span class="eyebrow" data-i="rs.eb">Reserva tu mesa</span><h2 data-wr data-i="rs.h">¿Dónde te esperamos?</h2><p class="lead" data-i="rs.p">Reserva tu mesa en línea. A partir de 9 personas, tu reservación es un evento: mira nuestros paquetes más abajo.</p></div>
+      <div class="rpk rv" role="group" aria-label="Elige restaurante" data-i-aria="rs.pick">
+        <button type="button" class="rp h" data-rk="higuera" aria-pressed="false"><span class="rp-ok" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.3 5 8.6l4.5-5"/></svg></span><img class="rp-lg" src="logos/nuevo_higuera_logo.svg" alt="La Higuera" width="1741" height="408"><span class="rp-d" data-i="rs.h.d">Desayunos · 8:30 am a 12:30 pm</span><span class="chip" data-card="higuera"><span class="dot"></span><span class="st"></span></span></button>
+        <button type="button" class="rp c" data-rk="crianza" aria-pressed="false"><span class="rp-ok" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.3 5 8.6l4.5-5"/></svg></span><img class="rp-lg" src="logos/logo-la-crianza-1939_logo-sin-carrier-claro.svg" alt="La Crianza 1939" width="514" height="322"><span class="rp-d" data-i="rs.c.d">Comida y cena · desde la 1:30 pm</span><span class="chip" data-card="crianza"><span class="dot"></span><span class="st"></span></span></button>
+      </div>
+
+      <div class="rbx rv" id="rbx" data-rest="crianza">
+        <div class="rb-ph" id="rbPh"></div>
+        <div class="rb-c">
+          <span class="rk-l" data-i="rb.eb">Reserva en línea</span>
+          <h3 id="rbT">Aparta tu mesa</h3>
+          <p id="rbP"></p>
+          <p class="rb-hr" id="rbHr"></p>
+          <a class="btn pri rb-go" href="https://www.covermanager.com/reservation/module_restaurant/restaurante-la-crianza/spanish" target="_blank" rel="noopener"><span data-i="rb.go">Reservar en línea</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
+          <div class="rb-more">
+            <div><span data-i="rb.big">¿Son 9 personas o más?</span><a href="#/reservar/eventos" data-i="rb.ev">Ver paquetes para eventos ↓</a></div>
+            <div><span data-i="rb.call">¿Prefieres llamar?</span><a id="rbTel" href="tel:+522212546202">221 254 6202</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rs-ev" id="eventos">
+    <div class="wrap">
+      <div class="sh shc sl"><span class="eyebrow" data-i="ev.eb">Eventos y grupos</span><h2 data-i="ev.h">Celebra con nosotros.</h2><p class="lead" data-i="ev.p">Para grupos de 9 personas o más: paquetes por persona y reservación por WhatsApp. Tenemos privados en planta alta para reuniones, conferencias y celebraciones.</p></div>
+      <div class="evc rv"><span class="evc-l" data-i="ev.q">¿Qué puedo celebrar?</span><div class="evc-t mq" id="evCel" role="img"></div></div>
+      <div class="evw rv">
+        <div class="evsw" id="evSw" role="group" aria-label="Elige restaurante" data-i-aria="rs.pick">
+          <button type="button" class="evt h" data-ek="higuera" aria-pressed="false"><b>La Higuera</b><span data-i="ev.h.s">Desayuno · 4 paquetes</span></button>
+          <button type="button" class="evt c" data-ek="crianza" aria-pressed="true"><b>La Crianza</b><span data-i="ev.c.s">Comida y cena · 4 paquetes</span></button>
+        </div>
+        <div class="evp" id="evp" data-rest="crianza">
+          <div class="evp-top">
+            <img class="evl h" src="logos/nuevo_higuera_logo.svg" alt="La Higuera" width="1741" height="408">
+            <img class="evl c" src="logos/logo-la-crianza-1939_logo-sin-carrier-claro.svg" alt="La Crianza 1939" width="514" height="322">
+            <div class="evp-tx"><h3 id="evT"></h3><p id="evNote"></p></div><button type="button" class="btn evp-sw" id="evSwap"></button>
+          </div>
+          <div class="pks" id="pks"></div>
+          <div class="evx" id="evx"></div>
+          <form class="evf" id="evf" novalidate>
+            <div class="evf-a">
+              <div class="rf-h"><span class="rk-l" data-i="ef.eb">Cotiza tu evento</span><h3 data-i="ef.h">Mándanos los datos por WhatsApp</h3></div>
+              <div class="fld"><span class="fl-l" id="efPl" data-i="ef.pk">Paquete</span><div class="opts" id="efP" role="group" aria-labelledby="efPl"></div></div>
+              <div class="fld two">
+                <label><span class="fl-l" data-i="ef.d">Fecha</span><input id="efD" type="date"></label>
+                <div><span class="fl-l" id="efNl" data-i="rf.n">Personas</span><div class="stp" id="efN" role="group" aria-labelledby="efNl"><button type="button" data-st="-1" aria-label="Menos" data-i-aria="rf.less">&minus;</button><output id="efNo" aria-live="polite">12</output><button type="button" data-st="1" aria-label="Más" data-i-aria="rf.more">+</button></div></div>
+              </div>
+              <div class="fld"><span class="fl-l" id="efTl" data-i="ef.t">Tipo de evento</span><div class="opts" id="efT" role="group" aria-labelledby="efTl"></div></div>
+              <label class="fld"><span class="fl-l" data-i="rf.nm">A nombre de</span><input id="efNm" type="text" autocomplete="name" maxlength="60" placeholder="Tu nombre o empresa" data-i-ph="ef.nmph"></label>
+            </div>
+            <div class="evf-b">
+              <div class="rf-pv"><span class="fl-l" data-i="rf.pv">Así llega tu mensaje</span><div class="chat"><div class="bub" id="efPv"></div></div></div>
+              <a class="btn pri rf-go" id="efGo" href="#" target="_blank" rel="noopener"><span data-i="rf.go">Enviar por WhatsApp</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span></a>
+              <p class="rf-n" data-i="rf.note">Se abre WhatsApp con tu mensaje listo para enviar.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
 </main>
 
 <footer class="foot">
@@ -1890,6 +2220,7 @@ var CFG={
 };
 var M=window.MENU||{higuera:{name:"La Higuera",secs:[]},crianza:{name:"La Crianza 1939",secs:[]},carniceria:{name:"Carnicería",secs:[]}};
 /* ---------- Live menu: the client edits three published Google Sheets; data.js stays as the fallback ---------- */
+var NOSHEET=false;
 var SHEETS=[
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSx-kpRXWTZcEQUmCiGwGbo_lioK0wCnX9FCR2q2pAYJ1L9PfQOGJh_QB-c7KJbfKGSX6K9iMpVzvvy/pub?output=csv",
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjk656cx5JdaUzThE0qCzk0mThpyVmy3OBHlPkh0kJJsOhU6frBNeaCm_hFSN02UWZnXM0GN1XeGrB/pub?output=csv",
@@ -1947,7 +2278,7 @@ function applySheet(k,secs){
   M[k]={name:BASE[k].name,secs:secs};
 }
 function liveMenu(){
-  if(!window.fetch) return;
+  if(!window.fetch || NOSHEET) return;
   var before=JSON.stringify(M);
   Promise.all(SHEETS.map(function(u){
     var ctl=window.AbortController?new AbortController():null, tm=setTimeout(function(){ if(ctl) ctl.abort(); },8000);
@@ -1961,7 +2292,7 @@ function liveMenu(){
   });
 }
 /* last good copy from the sheets shows instantly on the next visit (max 3 days old) */
-try{ var LC=JSON.parse(localStorage.getItem("lc-menu")||"null"); if(LC && LC.m && Date.now()-LC.t<3*864e5) ["higuera","crianza","carniceria"].forEach(function(k){ if(LC.m[k]&&LC.m[k].secs&&LC.m[k].secs.length) M[k]=LC.m[k]; }); }catch(e){}
+try{ var LC=NOSHEET?null:JSON.parse(localStorage.getItem("lc-menu")||"null"); if(LC && LC.m && Date.now()-LC.t<3*864e5) ["higuera","crianza","carniceria"].forEach(function(k){ if(LC.m[k]&&LC.m[k].secs&&LC.m[k].secs.length) M[k]=LC.m[k]; }); }catch(e){}
 setTimeout(liveMenu,0);
 
 /* ---------- i18n ---------- */
@@ -2016,9 +2347,9 @@ var D={es:{
  "h.today":"Today","h.week":"See all hours","h.hig":"La Higuera","h.cri":"La Crianza","h.until":"until","h.closes":"closes at",
  "wa.msg":"Hi, I’d like to book a table at {n}.","call.to":"Call ","rate.n":"Google reviews","vi.call":"Call"
 }};
-var CAT_EN={"Especial de temporada":"Seasonal special","Especiales de temporada":"Seasonal specials","Bowls y pan dulce":"Bowls & sweet bread","Favoritos dulces":"Sweet favorites","De la granja":"From the farm","Huevos y omelettes":"Eggs & omelettes","Mexicanos":"Mexican classics","Toasts":"Toasts","Pa’l antojo":"Cravings","Complementos":"Sides","Café":"Coffee","Bebidas vegetales (extra)":"Plant-based milk (extra)","Jugos":"Juices","Smoothies":"Smoothies","Tés":"Teas","Kombucha Deluz":"Kombucha Deluz","Otros":"Others","Entradas":"Starters","Sopas":"Soups","Tacos (por pieza)":"Tacos (each)","Ensaladas":"Salads","Parrilla nacional":"Mexican grill","Parrilla Crianza":"Crianza grill","Exclusivos de nuestra carnicería":"Butcher shop exclusives","Pastizal de macadamia":"Macadamia pasture beef","Maca Burger":"Maca Burger","Res en México":"Mexican-style beef","Pastas":"Pasta","Algo que no sea res":"Something other than beef","Brisket":"Brisket","Guarniciones extra":"Extra sides","Postres":"Desserts","Sin alcohol":"Non-alcoholic","Aperitivos":"Aperitifs","Cerveza":"Beer","Mojitos":"Mojitos","Mezcalinas":"Mezcalinas","Nuestros cócteles":"Signature cocktails","Cócteles clásicos":"Classic cocktails","Cócteles con café":"Coffee cocktails","Martinis":"Martinis","Tinto chileno":"Chilean red","Tinto español":"Spanish red","Tinto mexicano":"Mexican red","Tinto argentino":"Argentine red","Tinto francés":"French red","Rosado":"Rosé","Blanco mexicano":"Mexican white","Espumoso":"Sparkling","Vodka":"Vodka","Tequila":"Tequila","Mezcal":"Mezcal","Ron":"Rum","Whisky":"Whisky","Cognac":"Cognac","Brandy":"Brandy","Ginebra":"Gin","Digestivos":"Digestifs","Res de macadamia":"Macadamia beef","Cortes nacionales":"Mexican cuts","Cortes Crianza":"Crianza cuts","Paquetes especiales":"Special bundles","Caldo de hueso":"Bone broth","Lácteos":"Dairy","Comal La Crianza":"La Crianza comal","Salsas de la casa":"House salsas","Sal fósil de Zapotitlán":"Zapotitlán fossil salt","Carbón":"Charcoal"};
+var CAT_EN={"Especial de temporada":"Seasonal special","Especiales de temporada":"Seasonal specials","Bowls y pan dulce":"Bowls & sweet bread","Favoritos dulces":"Sweet favorites","De la granja":"From the farm","Huevos y omelettes":"Eggs & omelettes","Mexicanos":"Mexican classics","Toasts":"Toasts","Pa’l antojo":"Cravings","Complementos":"Sides","Café":"Coffee","Bebidas vegetales (extra)":"Plant-based milk (extra)","Jugos":"Juices","Smoothies":"Smoothies","Tés":"Teas","Kombucha Deluz":"Kombucha Deluz","Otros":"Others","Entradas":"Starters","Sopas":"Soups","Tacos (por pieza)":"Tacos (each)","Ensaladas":"Salads","Parrilla nacional":"Mexican grill","Parrilla Crianza":"Crianza grill","Exclusivos de nuestra carnicería":"Butcher shop exclusives","Res 100% alimentada con macadamia":"100% macadamia-fed beef","Pastizal de macadamia":"Macadamia pasture beef","Maca Burger":"Maca Burger","Res en México":"Mexican-style beef","Pastas":"Pasta","Algo que no sea res":"Something other than beef","Brisket":"Brisket","Guarniciones extra":"Extra sides","Postres":"Desserts","Sin alcohol":"Non-alcoholic","Aperitivos":"Aperitifs","Cerveza":"Beer","Mojitos":"Mojitos","Mezcalinas":"Mezcalinas","Nuestros cócteles":"Signature cocktails","Cócteles clásicos":"Classic cocktails","Cócteles con café":"Coffee cocktails","Martinis":"Martinis","Tinto chileno":"Chilean red","Tinto español":"Spanish red","Tinto mexicano":"Mexican red","Tinto argentino":"Argentine red","Tinto francés":"French red","Rosado":"Rosé","Blanco mexicano":"Mexican white","Espumoso":"Sparkling","Vodka":"Vodka","Tequila":"Tequila","Mezcal":"Mezcal","Ron":"Rum","Whisky":"Whisky","Cognac":"Cognac","Brandy":"Brandy","Ginebra":"Gin","Digestivos":"Digestifs","Res de macadamia":"Macadamia beef","Cortes nacionales":"Mexican cuts","Cortes Crianza":"Crianza cuts","Paquetes especiales":"Special bundles","Caldo de hueso":"Bone broth","Lácteos":"Dairy","Comal La Crianza":"La Crianza comal","Salsas de la casa":"House salsas","Sal fósil de Zapotitlán":"Zapotitlán fossil salt","Carbón":"Charcoal"};
 var SEC_EN={"Carta":"Food","Bebidas":"Drinks","Coctelería y cerveza":"Cocktails & beer","Vinos":"Wine","Destilados":"Spirits","Carnicería":"Butcher shop"};
-var INTRO={"Especiales de temporada":["Solo durante la temporada.","Only while the season lasts."],"Especial de temporada":["Solo durante la temporada.","Only while the season lasts."],"Parrilla Crianza":["Los cortes de la casa, a la parrilla.","Our house cuts, on the grill."],"Exclusivos de nuestra carnicería":["Cortes que salen directo de nuestra carnicería.","Cuts straight from our butcher shop."],"Res de macadamia":["Precio por kilo o por pieza.","Priced per kilo or per piece."]};
+var INTRO={"Especiales de temporada":["Solo durante la temporada.","Only while the season lasts."],"Especial de temporada":["Solo durante la temporada.","Only while the season lasts."],"Parrilla Crianza":["Los cortes de la casa, a la parrilla.","Our house cuts, on the grill."],"Exclusivos de nuestra carnicería":["Cortes que salen directo de nuestra carnicería.","Cuts straight from our butcher shop."],"Res 100% alimentada con macadamia":["La crianza de res de macadamia, exclusiva de nuestro sistema, produce un marmoleo de grado nueve con un sabor exquisito y grasas únicas gracias a su alimentación con nuez de macadamia.","Our macadamia-fed beef, exclusive to our ranch, reaches grade-nine marbling, with an exquisite flavor and unique fat from a diet of macadamia nuts."],"Res de macadamia":["Precio por kilo o por pieza.","Priced per kilo or per piece."]};
 /* Country flags (drawn as SVG so they look the same on every phone and on Windows) */
 var FLAGS={
  mx:['México','Mexico','<rect width="30" height="20" fill="#fff"/><rect width="10" height="20" fill="#006847"/><rect x="20" width="10" height="20" fill="#ce1126"/><circle cx="15" cy="10" r="2.6" fill="#8a5a2b"/><path d="M12.6 11.8q2.4 1.6 4.8 0" stroke="#3a7d3a" stroke-width=".9" fill="none"/>'],
@@ -2116,6 +2447,112 @@ function renderStatus(){
   $$("[data-card]").forEach(function(el){ var c=cardStatus(el.getAttribute("data-card"),el.hasAttribute("data-long")); el.classList.toggle("off",!c.open); $(".st",el).textContent=c.txt; });
 }
 
+Object.assign(D.es,{"nav.res":"Reservar","nav.res2":"Reservaciones","rs.k":"Tu mesa o tu evento, en Teziutlán Sur 93","rs.eb":"Reserva tu mesa","rs.h":"¿Dónde te esperamos?","rs.p":"Reserva tu mesa en línea. A partir de 9 personas, tu reservación es un evento: mira nuestros paquetes más abajo.","rs.pick":"Elige restaurante","rs.h.d":"Desayunos · 8:30 am a 12:30 pm","rs.c.d":"Comida y cena · desde la 1:30 pm",
+ "rb.eb":"Reserva en línea","rb.go":"Reservar en línea","rb.big":"¿Son 9 personas o más?","rb.ev":"Ver paquetes para eventos ↓","rb.call":"¿Prefieres llamar?",
+ "rf.n":"Personas","rf.nm":"A nombre de","rf.pv":"Así llega tu mensaje","rf.go":"Enviar por WhatsApp","rf.note":"Se abre WhatsApp con tu mensaje listo para enviar.","rf.less":"Menos","rf.more":"Más",
+ "ev.eb":"Eventos y grupos","ev.h":"Celebra con nosotros.","ev.p":"Para grupos de 9 personas o más: paquetes por persona y reservación por WhatsApp. Tenemos privados en planta alta para reuniones, conferencias y celebraciones.","ev.q":"¿Qué puedo celebrar?","ev.h.s":"Desayuno · 4 paquetes","ev.c.s":"Comida y cena · 4 paquetes",
+ "ef.eb":"Cotiza tu evento","ef.h":"Mándanos los datos por WhatsApp","ef.pk":"Paquete","ef.d":"Fecha","ef.t":"Tipo de evento","ef.nmph":"Tu nombre o empresa"});
+Object.assign(D.en,{"nav.res":"Book","nav.res2":"Bookings","rs.k":"Your table or your event, at Teziutlán Sur 93","rs.eb":"Book a table","rs.h":"Where shall we expect you?","rs.p":"Book your table online. From 9 guests on, your booking is an event: see our packages below.","rs.pick":"Choose a restaurant","rs.h.d":"Breakfast · 8:30 am to 12:30 pm","rs.c.d":"Lunch & dinner · from 1:30 pm",
+ "rb.eb":"Book online","rb.go":"Book online","rb.big":"9 guests or more?","rb.ev":"See event packages ↓","rb.call":"Rather call?",
+ "rf.n":"Guests","rf.nm":"Name","rf.pv":"The message you’ll send","rf.go":"Send on WhatsApp","rf.note":"WhatsApp opens with your message ready to send.","rf.less":"Fewer","rf.more":"More",
+ "ev.eb":"Events & groups","ev.h":"Celebrate with us.","ev.p":"For groups of 9 or more: per-guest packages, booked on WhatsApp. We have private rooms upstairs for meetings, conferences and celebrations.","ev.q":"What can I celebrate?","ev.h.s":"Breakfast · 4 packages","ev.c.s":"Lunch & dinner · 4 packages",
+ "ef.eb":"Get a quote","ef.h":"Send us the details on WhatsApp","ef.pk":"Package","ef.d":"Date","ef.t":"Type of event","ef.nmph":"Your name or company"});
+
+/* ---------- Reservar: a table online or by WhatsApp, and event packages from the client's PDFs ---------- */
+var COVER="https://www.covermanager.com/reservation/module_restaurant/restaurante-la-crianza/spanish";
+var RS={k:null}, EVS={pk:0,n:12,type:null};
+var CEL=[["Baby shower","Baby shower"],["Primera comunión","First communion"],["Cumpleaños","Birthday"],["Boda civil","Civil wedding"],["Reunión empresarial","Business meeting"],["Conferencia","Conference"],["Fin de año","Year-end party"]];
+var PP=[" por persona"," per guest"], PB=["por botella","per bottle"];
+var EV={
+  higuera:{title:["Desayuno para tu evento","Breakfast for your event"],note:["Elige un paquete y cada invitado escoge un platillo de ese paquete.","Choose a package and each guest picks one dish from it."],hint:["Cada invitado elige uno","Each guest picks one"],
+    pk:[{p:210,it:[["Chilaquiles con pollo"],["Hot cakes naturales","Plain hot cakes"],["Molletes naturales","Plain molletes"]]},
+        {p:245,it:[["Toast La Higuera"],["Enchiladas de pipián verde","Green pipián enchiladas"],["Picaditas"]]},
+        {p:225,it:[["Hot cakes Higuera"],["Huevos rotos con serrano","Broken eggs with serrano"],["Omelette Philly"]]},
+        {p:190,it:[["Huevos al gusto","Eggs your way"],["Chilaquiles sin proteína","Chilaquiles, no protein"]]}],
+    inc:["Todos los paquetes incluyen café de refill y jugo de naranja (350 ml).","Every package includes refillable coffee and orange juice (350 ml)."],
+    ext:{h:["Agrega","Add"],rows:[[["Pan dulce","Pan dulce (sweet bread)"],"+$20",PP],[["Fruta de temporada","Seasonal fruit"],"+$25",PP]]},
+    desc:{h:["Descorche y servicios externos","Corkage & outside services"],rows:[[["Pastel externo","Outside cake"],"$200",["por cada 10 personas, incluye loza y cubiertos","per 10 guests, plates and cutlery included"]],[["Vino de mesa","Table wine"],"$200",PB],[["Destilados gama media","Mid-range spirits"],"$300",PB],[["Destilados gama alta","Premium spirits"],"$400",PB]]}},
+  crianza:{title:["Comida o cena para tu evento","Lunch or dinner for your event"],note:["Elige el paquete que más te guste. Los precios son por persona.","Choose the package you like best. Prices are per guest."],hint:null,
+    pk:[{p:550,it:[["2 chalupas por persona","2 chalupas per guest"],["New York Nacional (400 g) o Salmón (250 g)","New York Nacional (400 g) or salmon (250 g)"],["Guarnición: cremoso de papa","Side: creamy potato"],["½ panqué de elote por persona","½ corn cake per guest"]]},
+        {p:550,it:[["Sopa de hongos","Mushroom soup"],["Parrillada de New York, pollo, chistorra y chorizo, con arroz, guacamole, frijoles y tortillas","Mixed grill of New York, chicken, chistorra and chorizo, with rice, guacamole, beans and tortillas"],["½ panqué de elote por persona","½ corn cake per guest"]]},
+        {p:690,it:[["2 chalupas por persona","2 chalupas per guest"],["Sopa de hongos o sopa de tortilla","Mushroom or tortilla soup"],["Rib eye Nacional (400 g) o Filete Crianza (250 g)","Rib eye Nacional (400 g) or Filete Crianza (250 g)"],["Guarnición: papas a la francesa","Side: French fries"],["½ strudel de manzana por persona","½ apple strudel per guest"]]},
+        {p:820,it:[["2 chalupas por persona","2 chalupas per guest"],["½ ensalada de betabel y mango","½ beet and mango salad"],["Picaña Crianza (400 g) o Cowboy Nacional (400 g)","Picaña Crianza (400 g) or Cowboy Nacional (400 g)"],["Guarnición a elegir","Side of your choice"],["Cheesecake"]]}],
+    inc:["Todos los paquetes vienen con salsas, tortillas y limones.","Every package comes with salsas, tortillas and limes."],
+    ext:{h:["Bebidas de refill","Refillable drinks"],sub:["Coca-Cola, Fresca, agua mineral, agua de jamaica, agua de limón y hielos.","Coca-Cola, Fresca, mineral water, hibiscus water, limeade and ice."],rows:[[["4 horas","4 hours"],"$150",PP],[["6 horas","6 hours"],"$170",PP],[["8 horas","8 hours"],"$190",PP]]},
+    desc:{h:["Descorche","Corkage"],rows:[[["Vino de mesa","Table wine"],"$200",PB],[["Destilados gama media","Mid-range spirits"],"$300",PB],[["Destilados gama alta","Premium spirits"],"$400",PB],[["Pastel","Cake"],"$200",["por cada 10 personas","per 10 guests"]]]}}
+};
+var TERMS=[["Paquetes para grupos de 9 personas o más.","Packages are for groups of 9 or more."],["Los precios incluyen IVA y no incluyen propina.","Prices include VAT and do not include tip."],["Para apartar la fecha se pide un anticipo del 50%; el resto se liquida un día antes.","A 50% deposit holds the date; the balance is due the day before."],["No hay reembolsos. Los lugares extra se cobran bajo los mismos términos.","No refunds. Extra places are charged on the same terms."]];
+function L2(x){ return x ? (lang==="en"&&x[1]!=null?x[1]:x[0]) : ""; }
+function mxToday(){
+  try{ var p=new Intl.DateTimeFormat("en-US",{timeZone:"America/Mexico_City",year:"numeric",month:"numeric",day:"numeric"}).formatToParts(new Date()), g=function(k){ return +p.filter(function(z){return z.type===k;})[0].value; }; return Date.UTC(g("year"),g("month")-1,g("day")); }
+  catch(e){ var d=new Date(); return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()); }
+}
+/* bookable start times: every 30 min, the last one an hour before closing; today only from 30 min from now */
+function fmtD(d,o){ o.timeZone="UTC"; return new Intl.DateTimeFormat(lang==="en"?"en-US":"es-MX",o).format(d); }
+function rows(list){ return list.map(function(r){ var u=(r[2]===PP||r[2]===PB)?"":'<small>'+esc(L2(r[2]).trim())+'</small>'; return '<li class="pr"><span>'+esc(L2(r[0]))+'</span><i></i><b>'+r[1]+'</b>'+u+'</li>'; }).join(""); }
+function renderRS(){
+  if(!$("#rbx")) return;
+  if(!RS.k) RS.k=brandNow();
+  var k=RS.k, p=CFG.phones[k], en=lang==="en", hg=k==="higuera";
+  $$(".rp").forEach(function(b){ b.setAttribute("aria-pressed",String(b.getAttribute("data-rk")===k)); });
+  $("#rbx").setAttribute("data-rest",k);
+  var img=hg?"H30":"C26", ph=$("#rbPh");
+  if(ph.getAttribute("data-img")!==img){ ph.setAttribute("data-img",img); ph.innerHTML='<img src="img/t/'+img+'.webp" srcset="img/t/'+img+'.webp 720w, img/l/'+img+'.webp 1600w" sizes="(max-width:860px) 100vw, 480px" alt="" loading="lazy" decoding="async">'; }
+  $("#rbT").textContent=en?"Book your table at "+p.short:"Aparta tu mesa en "+p.short;
+  $("#rbP").textContent=en?"Choose the day, time and number of guests in our booking system, for groups of up to 8.":"Elige día, hora y número de personas en nuestro sistema de reservaciones, para grupos de hasta 8 personas.";
+  $("#rbHr").textContent=hg?(en?"Monday to Sunday · 8:30 am to 12:30 pm":"Lunes a domingo · 8:30 am a 12:30 pm"):(en?"Monday to Sunday · from 1:30 pm":"Lunes a domingo · desde la 1:30 pm");
+  var tl=$("#rbTel"); tl.href="tel:"+p.tel; tl.textContent=p.txt;
+  renderEV();
+}
+function renderEV(){
+  if(!$("#evp")) return;
+  var k=RS.k||brandNow(), e=EV[k], en=lang==="en";
+  $("#evp").setAttribute("data-rest",k);
+$$("#evSw .evt").forEach(function(b){ b.setAttribute("aria-pressed",String(b.getAttribute("data-ek")===k)); });
+  var sw=$("#evSwap"), to=k==="crianza"?"higuera":"crianza"; sw.className="btn evp-sw "+(to==="higuera"?"h":"c"); sw.innerHTML='<span>'+(en?"See packages from ":"Ver paquetes de ")+'<b>'+CFG.phones[to].short+'</b></span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>';
+  var cel=CEL.map(function(c){ return '<span class="tag">'+esc(L2(c))+'</span><i class="dia" aria-hidden="true"></i>'; }).join(""); $("#evCel").innerHTML='<div class="mq-t">'+cel+cel+cel+cel+'</div>'; $("#evCel").setAttribute("aria-label",CEL.map(L2).join(", "));
+  $("#evT").textContent=L2(e.title); $("#evNote").textContent=L2(e.note);
+  $("#pks").innerHTML=e.pk.map(function(x,i){ var on=EVS.pk===i;
+    return '<article class="pkc'+(on?" on":"")+'"><span class="pk-n">'+(en?"Package ":"Paquete ")+(i+1)+'</span><div class="pk-p"><b>$'+x.p+'</b><small>'+(en?"per guest":"por persona")+'</small></div>'+(e.hint?'<span class="pk-h">'+L2(e.hint)+'</span>':"")+'<ul>'+x.it.map(function(it){ return '<li>'+esc(L2(it))+'</li>'; }).join("")+'</ul><button type="button" class="btn'+(on?" pri":"")+' pk-go" data-pkgo="'+i+'" aria-pressed="'+on+'"><span>'+(on?(en?"Chosen":"Elegido"):(en?"Choose this package":"Elegir paquete"))+'</span><span class="ic" aria-hidden="true">'+(on?'<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.3 5 8.6l4.5-5"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>')+'</span></button></article>'; }).join("");
+  $("#evx").innerHTML='<div class="exb"><span class="fl-l">'+(en?"Included":"Incluye")+'</span><p class="inc">'+esc(L2(e.inc))+'</p><span class="fl-l">'+esc(L2(e.ext.h))+'</span>'+(e.ext.sub?'<p class="sub">'+esc(L2(e.ext.sub))+'</p>':"")+'<ul class="prs">'+rows(e.ext.rows)+'</ul><p class="unit">'+(en?"Prices per guest":"Precios por persona")+'</p></div>'
+    +'<div class="exb"><span class="fl-l">'+esc(L2(e.desc.h))+'</span><ul class="prs">'+rows(e.desc.rows)+'</ul><p class="unit">'+(en?"Wine and spirits, per bottle":"Vinos y destilados, por botella")+'</p></div>'
+    +'<div class="exb"><span class="fl-l">'+(en?"Terms and conditions":"Términos y condiciones")+'</span><ul class="trm">'+TERMS.map(function(x){ return '<li>'+esc(L2(x))+'</li>'; }).join("")+'</ul></div>';
+  $("#efP").innerHTML=e.pk.map(function(x,i){ return '<button type="button" class="opt" data-pk="'+i+'" aria-pressed="'+(EVS.pk===i)+'">'+(i+1)+' · $'+x.p+'</button>'; }).join("");
+  $("#efT").innerHTML=CEL.map(function(c,i){ return '<button type="button" class="opt" data-et="'+i+'" aria-pressed="'+(EVS.type===i)+'">'+esc(L2(c))+'</button>'; }).join("");
+  $("#efD").min=new Date(mxToday()).toISOString().slice(0,10);
+  $("#efNo").textContent=EVS.n;
+  evMsg();
+}
+function evMsg(){
+  var k=RS.k||brandNow(), e=EV[k], p=CFG.phones[k], en=lang==="en", v=$("#efD").value, nm=$("#efNm").value.trim();
+  var L=[en?"Hi, I’d like a quote for an event at "+p.name+".":"Hola, quiero cotizar un evento en "+p.name+".",""];
+  L.push("• "+(EVS.pk!=null?(en?"Package ":"Paquete ")+(EVS.pk+1)+" ($"+e.pk[EVS.pk].p+L2(PP)+")":(en?"Package: not decided yet":"Paquete: aún no lo decido")));
+  L.push("• "+(en?"Date: ":"Fecha: ")+(v?fmtD(new Date(v+"T00:00:00Z"),{weekday:"long",day:"numeric",month:"long",year:"numeric"}):(en?"to be defined":"por definir")));
+  L.push("• "+(en?"Guests: ":"Personas: ")+EVS.n);
+  if(EVS.type!=null) L.push("• "+(en?"Event: ":"Evento: ")+L2(CEL[EVS.type]).toLowerCase());
+  if(nm) L.push("• "+(en?"Name: ":"A nombre de: ")+nm);
+  L.push("",en?"Do you have availability for that date?":"¿Tienen disponibilidad para esa fecha?");
+  var tx=L.join("\n"); $("#efPv").textContent=tx; $("#efGo").href="https://wa.me/"+p.wa+"?text="+encodeURIComponent(tx);
+}
+function rsJump(a){ var el=$(a==="eventos"?"#eventos":".rpk"); if(!el) return; setTimeout(function(){ scrollTo({top:el.getBoundingClientRect().top+scrollY-(a==="eventos"?40:110),behavior:reduce?"auto":"smooth"}); },60); }
+(function(){
+  var pg=$('[data-page="reservar"]'); if(!pg) return;
+  pg.addEventListener("click",function(ev){
+    var b=ev.target.closest("button"); if(!b || !pg.contains(b)) return;
+    var a;
+    if((a=b.getAttribute("data-rk"))){ if(a!==RS.k){ RS.k=a; EVS.pk=0; renderRS(); } return; }
+    if(b.id==="evSwap"){ RS.k=RS.k==="crianza"?"higuera":"crianza"; EVS.pk=0; renderRS(); return; }
+    if((a=b.getAttribute("data-ek"))){ if(a!==RS.k){ RS.k=a; EVS.pk=0; renderRS(); } return; }
+    if((a=b.getAttribute("data-st"))!=null){ EVS.n=Math.max(9,Math.min(300,EVS.n+(+a))); $("#efNo").textContent=EVS.n; evMsg(); return; }
+    if((a=b.getAttribute("data-pkgo"))!=null){ EVS.pk=+a; renderEV(); var f=$("#evf"); scrollTo({top:f.getBoundingClientRect().top+scrollY-90,behavior:reduce?"auto":"smooth"}); return; }
+    if((a=b.getAttribute("data-pk"))!=null){ EVS.pk=+a; renderEV(); return; }
+    if((a=b.getAttribute("data-et"))!=null){ EVS.type=(EVS.type===+a)?null:+a; renderEV(); return; }
+  });
+  $("#efNm").addEventListener("input",evMsg);
+  $("#efD").addEventListener("input",evMsg); $("#efD").addEventListener("change",evMsg);
+  $$("#evf").forEach(function(f){ f.addEventListener("submit",function(e){ e.preventDefault(); }); });
+})();
+
 /* ---------- static i18n ---------- */
 function applyLang(){
   document.documentElement.lang=lang;
@@ -2130,7 +2567,7 @@ function applyLang(){
   refreshContacts(); renderSoc(); renderFavs();
   fillHero(.32); pressHB(); if(heroPlayed && route==="inicio"){ var hc0=$("#heroC"); if(hc0) hc0.classList.add("go","seen"); }
   refreshContacts(); renderRate(); renderDay(); renderCDay();
-  renderStatus(); renderHours(); renderTemp(); renderSteps(); renderCuts();
+  renderStatus(); renderHours(); renderTemp(); renderSteps(); renderCuts(); renderRS();
   if(menuBuilt) renderMenu();
   setTitle();
 }
@@ -2214,8 +2651,8 @@ function fillHero(base){
   hc.setAttribute("data-b",hb);
   splitHero(t(k[0]),t(k[1]),base);
   $("#hsub").textContent=t(k[2]);
-  $("#hmenu").href="#/menu/"+hb; $("#hmenuT").textContent=t(k[3]);
-  $("#hcall").setAttribute("data-tel",hb); $("#hstat").setAttribute("data-card",hb);
+  $("#hmenu").href="#/menu/"+hb; var hrs=$("#hres"); if(hrs) hrs.href="#/reservar/"+hb; $("#hmenuT").textContent=t(k[3]);
+  $("#hstat").setAttribute("data-card",hb);
   fitHero(); heroFit();
 }
 /* If the headline doesn't fit on one line, break it where the slogan breaks instead of wherever the browser wraps */
@@ -2544,7 +2981,7 @@ function tourTick(vh){
 }
 
 /* ---------- Router with curtain ---------- */
-var heroPlayed=false, route="", ROUTES=["inicio","menu","nosotros","contacto"], busy=false, covering=false;
+var heroPlayed=false, route="", ROUTES=["inicio","menu","reservar","nosotros","contacto"], busy=false, covering=false;
 function parse(){ var h=(location.hash||"").replace(/^#\/?/,"").split("/"); var r=h[0]||"inicio"; if(ROUTES.indexOf(r)<0) r="inicio"; return {r:r,a:h[1]||"",b:h[2]||""}; }
 function show(p){
   route=p.r;
@@ -2560,15 +2997,17 @@ function show(p){
   document.documentElement.classList.toggle("home",p.r==="inicio");
   if(p.r==="inicio") lockHero();
   if(p.r==="inicio" && heroPlayed) playHero(); heroPlayed=true;
+  if(p.r==="reservar"){ if(p.a && CFG.phones[p.a]) RS.k=p.a; renderRS(); }
   setTitle(); scrollTo(0,0); reveal(); collectSL(); renderStatus();
+  if(p.r==="reservar" && p.a) rsJump(p.a);
 }
-var TITLES={inicio:["La Crianza 1939 · La Higuera · Puebla","La Crianza 1939 · La Higuera · Puebla"],menu:["Menú · La Crianza 1939 y La Higuera","Menu · La Crianza 1939 & La Higuera"],nosotros:["Nosotros · La Crianza 1939","About · La Crianza 1939"],contacto:["Contacto · La Crianza 1939","Contact · La Crianza 1939"]};
+var TITLES={inicio:["La Crianza 1939 · La Higuera · Puebla","La Crianza 1939 · La Higuera · Puebla"],menu:["Menú · La Crianza 1939 y La Higuera","Menu · La Crianza 1939 & La Higuera"],nosotros:["Nosotros · La Crianza 1939","About · La Crianza 1939"],contacto:["Contacto · La Crianza 1939","Contact · La Crianza 1939"],reservar:["Reservaciones y eventos · La Crianza 1939 y La Higuera","Bookings & events · La Crianza 1939 & La Higuera"]};
 function setTitle(){ if(route && TITLES[route]) document.title=TITLES[route][lang==="en"?1:0]; }
 function go(){
   var p=parse();
   if(!route){ show(p); return; }
   if(covering) return; /* the curtain is still closing: it opens on whatever the address says by then */
-  if(p.r===route){ if(p.r==="menu") show(p); else scrollTo({top:0,behavior:reduce?"auto":"smooth"}); return; }
+  if(p.r===route){ if(p.r==="menu") show(p); else if(p.r==="reservar" && p.a){ if(CFG.phones[p.a]){ RS.k=p.a; renderRS(); } rsJump(p.a); } else scrollTo({top:0,behavior:reduce?"auto":"smooth"}); return; }
   if(reduce||busy){ show(p); return; }
   busy=true; covering=true; var c=$("#curtain"); c.classList.remove("leave"); void c.offsetWidth; c.classList.add("cover");
   setTimeout(function(){
