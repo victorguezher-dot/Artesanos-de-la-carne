@@ -1577,7 +1577,6 @@ html{background:#171310}
 .rf-n{margin:10px 0 0;text-align:center;font-size:13.5px;color:var(--pm)}
 
 /* events */
-.rs-ev{padding-top:0}
 .evc{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 14px;max-width:900px;margin:30px auto 0}
 .evc-l{font:italic 400 20px/1.3 Arapey,Georgia,serif;color:var(--brass2)}
 .evc-t{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
@@ -1765,6 +1764,60 @@ html{background:#171310}
 .phlock .ph{height:min(calc(var(--phv) * 62),600px)}
 .phlock .ph.ph-s{height:min(calc(var(--phv) * 42),420px)}
 .phlock .ph img{will-change:auto}
+
+/* events page: "desde" price */
+.ev-from{display:inline-flex;align-items:baseline;gap:6px;margin-left:4px;padding:3px 12px;border-radius:999px;background:var(--pt);box-shadow:inset 0 0 0 1px var(--pl);color:var(--pi);font-size:14.5px;white-space:nowrap}
+.ev-from b{font:600 17px/1 var(--pf);font-variant-numeric:tabular-nums;color:var(--pa)}
+.evp[data-rest="higuera"] .ev-from b{color:#cf585f}
+#evLead b{color:var(--cream);font-weight:600;font-variant-numeric:tabular-nums}
+.pr.np{grid-template-columns:1fr}
+.pk-n+.pk-h,.pk-n+ul{margin-top:14px}
+/* menus without prices */
+.fc-row .fc-ld:last-child{visibility:hidden}
+
+.dish.np .t::after{display:none}
+
+/* ---- portion in the price's place ---- */
+.dish .pr.pt{font-weight:600;font-size:15.5px;letter-spacing:.01em;color:var(--brass2)}
+#list[data-m="crianza"] .dish .pr.pt{font:italic 400 17px/1.3 Arapey,Georgia,serif;color:#dcda8d}
+#list[data-m="higuera"] .dish .pr.pt{font:600 14.5px/1.35 "Space Grotesk",var(--f-b);color:#716d31}
+
+/* ---- butcher's tags ---- */
+.ctags{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.ctag{position:relative;display:grid;align-content:center;gap:4px;min-height:64px;padding:12px 16px 12px 40px;background:#efe6d2;color:#6b3a22;
+  clip-path:polygon(18px 0,100% 0,100% 100%,18px 100%,0 50%);filter:drop-shadow(0 1px 0 rgba(107,58,34,.25));
+  background-image:linear-gradient(90deg,rgba(107,58,34,.06),rgba(107,58,34,0) 40%),repeating-linear-gradient(0deg,rgba(107,58,34,.025) 0 2px,transparent 2px 4px);
+  transition:transform .2s cubic-bezier(.23,1,.32,1)}
+.ctag i{position:absolute;left:19px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:#d3cfb8;box-shadow:inset 0 0 0 1.5px rgba(107,58,34,.45)}
+.ctag b{font:700 15px/1.25 var(--f-b);letter-spacing:.06em;text-transform:uppercase}
+.ctag small{font:italic 500 13.5px/1.2 var(--f-b);color:#7d5a43;letter-spacing:.02em}
+.ctags .ctag:nth-child(3n+2){--r:-.6deg}.ctags .ctag:nth-child(3n){--r:.5deg}
+@media (hover:hover) and (pointer:fine){.ctag:hover{transform:rotate(var(--r,-.8deg)) translateY(-1px)}}
+.cat .banner+.ctags{margin-top:18px}
+@media (max-width:760px){
+  .ctags{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .ctag{min-height:60px;padding:10px 10px 10px 32px;clip-path:polygon(14px 0,100% 0,100% 100%,14px 100%,0 50%)}
+  .ctag i{left:15px;width:8px;height:8px;margin-top:-4px}
+  .ctag b{font-size:13.5px;letter-spacing:.04em}
+  .ctag small{font-size:12.5px}
+}
+@media (prefers-reduced-motion:reduce){.ctag{transition:none}}
+
+/* ---- slightly larger menu text ---- */
+.dish .q{font-size:14.5px}
+.dish p{font-size:16.5px}
+.cat-h .n{font-size:14.5px}
+#list[data-m="crianza"] .dish h4{font-size:20px}
+#list[data-m="crianza"] .dish p,#list[data-m="crianza"] .cnote{font-size:17px}
+#list[data-m="higuera"] .dish h4{font-size:15.5px}
+#list[data-m="higuera"] .dish .q{font-size:13.5px}
+#list[data-m="higuera"] .dish p,#list[data-m="higuera"] .cnote{font-size:15.5px}
+#list[data-m="higuera"] .pc .o b{font-size:14px}
+#list[data-m="higuera"] .pc .o span{font-size:13px}
+#list[data-m="carniceria"] .dish h4{font-size:16.5px}
+
+/* phones: the menu sheet runs straight into the footer, no cream gap */
+@media (max-width:760px){[data-page="menu"] .wrap.ml{padding-bottom:0}}
 </style>
 </head>
 <body>
@@ -1774,6 +1827,7 @@ html{background:#171310}
     <a href="#/" data-r="inicio" data-i="nav.inicio">Inicio</a>
     <a href="#/menu" data-r="menu" data-i="nav.menu">Menú</a>
     <a href="#/reservar" data-r="reservar" data-i="nav.res">Reservar</a>
+    <a href="#/eventos" data-r="eventos" data-i="nav.ev">Eventos</a>
     <a href="#/nosotros" data-r="nosotros" data-i="nav.nos">Nosotros</a>
     <a href="#/contacto" data-r="contacto" data-i="nav.contacto">Contacto</a>
   </nav>
@@ -1790,6 +1844,7 @@ html{background:#171310}
     <a href="#/" data-r="inicio" data-i="nav.inicio">Inicio</a>
     <a href="#/menu" data-r="menu" data-i="nav.menu">Menú</a>
     <a href="#/reservar" data-r="reservar" data-i="nav.res">Reservar</a>
+    <a href="#/eventos" data-r="eventos" data-i="nav.ev">Eventos</a>
     <a href="#/nosotros" data-r="nosotros" data-i="nav.nos">Nosotros</a>
     <a href="#/contacto" data-r="contacto" data-i="nav.contacto">Contacto</a>
   </nav>
@@ -2118,7 +2173,7 @@ html{background:#171310}
 
   <section class="sec rs-sec">
     <div class="wrap">
-      <div class="sh shc wr"><span class="eyebrow" data-i="rs.eb">Reserva tu mesa</span><h2 data-wr data-i="rs.h">¿Dónde te esperamos?</h2><p class="lead" data-i="rs.p">Reserva tu mesa en línea. A partir de 9 personas, tu reservación es un evento: mira nuestros paquetes más abajo.</p></div>
+      <div class="sh shc wr"><span class="eyebrow" data-i="rs.eb">Reserva tu mesa</span><h2 data-wr data-i="rs.h">¿Dónde te esperamos?</h2><p class="lead" data-i="rs.p">Reserva tu mesa en línea. A partir de 9 personas, tu reservación es un evento: mira nuestros paquetes en Eventos.</p></div>
       <div class="rpk rv" role="group" aria-label="Elige restaurante" data-i-aria="rs.pick">
         <button type="button" class="rp h" data-rk="higuera" aria-pressed="false"><span class="rp-ok" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.3 5 8.6l4.5-5"/></svg></span><img class="rp-lg" src="logos/nuevo_higuera_logo.svg" alt="La Higuera" width="1741" height="408"><span class="rp-d" data-i="rs.h.d">Desayunos · 8:30 am a 12:30 pm</span><span class="chip" data-card="higuera"><span class="dot"></span><span class="st"></span></span></button>
         <button type="button" class="rp c" data-rk="crianza" aria-pressed="false"><span class="rp-ok" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.3 5 8.6l4.5-5"/></svg></span><img class="rp-lg" src="logos/logo-la-crianza-1939_logo-sin-carrier-claro.svg" alt="La Crianza 1939" width="514" height="322"><span class="rp-d" data-i="rs.c.d">Comida y cena · desde la 1:30 pm</span><span class="chip" data-card="crianza"><span class="dot"></span><span class="st"></span></span></button>
@@ -2133,7 +2188,7 @@ html{background:#171310}
           <p class="rb-hr" id="rbHr"></p>
           <a class="btn pri rb-go" href="https://www.covermanager.com/reservation/module_restaurant/restaurante-la-crianza/spanish" target="_blank" rel="noopener"><span data-i="rb.go">Reservar en línea</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a>
           <div class="rb-more">
-            <div><span data-i="rb.big">¿Son 9 personas o más?</span><a href="#/reservar/eventos" data-i="rb.ev">Ver paquetes para eventos ↓</a></div>
+            <div><span data-i="rb.big">¿Son 9 personas o más?</span><a id="rbEv" href="#/eventos" data-i="rb.ev">Ver paquetes para eventos →</a></div>
             <div><span data-i="rb.call">¿Prefieres llamar?</span><a id="rbTel" href="tel:+522212546202">221 254 6202</a></div>
           </div>
         </div>
@@ -2141,9 +2196,12 @@ html{background:#171310}
     </div>
   </section>
 
+</section>
+<section class="page" data-page="eventos">
+  <div class="ph ph-s"><img src="img/l/C25.webp" alt="" style="object-position:50% 55%"><div class="t"><div class="wrap"><h1 data-i="nav.ev2">Eventos</h1><span class="k" data-i="ev.k">Celebraciones y reuniones en Teziutlán Sur 93</span></div></div></div>
   <section class="sec rs-ev" id="eventos">
     <div class="wrap">
-      <div class="sh shc sl"><span class="eyebrow" data-i="ev.eb">Eventos y grupos</span><h2 data-i="ev.h">Celebra con nosotros.</h2><p class="lead" data-i="ev.p">Para grupos de 9 personas o más: paquetes por persona y reservación por WhatsApp. Tenemos privados en planta alta para reuniones, conferencias y celebraciones.</p></div>
+      <div class="sh shc wr"><span class="eyebrow" data-i="ev.eb">Eventos y grupos</span><h2 data-wr data-i="ev.h">Celebra con nosotros.</h2><p class="lead" id="evLead"></p></div>
       <div class="evc rv"><span class="evc-l" data-i="ev.q">¿Qué puedo celebrar?</span><div class="evc-t mq" id="evCel" role="img"></div></div>
       <div class="evw rv">
         <div class="evsw" id="evSw" role="group" aria-label="Elige restaurante" data-i-aria="rs.pick">
@@ -2317,7 +2375,7 @@ var D={es:{
  "fav.eb":"Favoritos de la casa","fav.h":"Lo que no te puedes perder.","fav.from":"Desde","fav.cuts":"Rib eye, New York y T-bone","fav.carn":"Cortes para tu asado",
  "lu.eb":"El lugar","lu.h":"Un lugar para quedarse un rato.","lu.c1":"La entrada","lu.c2":"Planta baja","lu.c3":"La terraza","lu.c4":"Tu mesa","lu.p1":"Dos letreros, una misma casa: La Higuera y La Crianza.","lu.p2":"La barra, la madera y la luz cálida de los focos.","lu.p3":"Al aire libre, entre plantas y celosías de madera.","lu.p4":"Te esperamos en Teziutlán Sur 93.","lu.a5":"Planta baja con la barra y mesas de madera","lu.a1":"Terraza del restaurante","lu.a2":"Entrada con los letreros de La Higuera y La Crianza","lu.a3":"Fachada sobre Teziutlán Sur","lu.a4":"Mesas en la terraza",
  "nh.eb":"Nuestra historia","nh.p":"El higo es mucho más que una simple fruta; es una flor que se repliega, simbolizando introspección y renacimiento. Inspirándose en este ciclo, La Crianza creó La Higuera: un restaurante en la Colonia La Paz que celebra el arte del desayuno, todos los días de 8:30 am a 12:30 pm.",
- "mh.cri":"Nuestra pasión por la gastronomía mexicana es profunda y refleja un legado cultural en constante evolución. Combinamos técnicas de parrilla con sabores modernos para ofrecer platillos que honran nuestra herencia culinaria.","mh.tort":"Nuestras tortillas, hechas a mano en el comal al aire libre del restaurante, brindan un sabor único que evoca el México antiguo. Pídelas sin costo para disfrutar aquí o cómpralas para llevar.","mh.hig":"El gusto de comenzar bien el día.","mh.hig2":"Platillos preparados al momento · tiempo estimado: 20 min","mh.carn":"Carnicería","mh.carn2":"Res de nuestra ganadería · Teziutlán Sur 93","mc.big":"Pedidos por WhatsApp","nh.q":"El gusto de comenzar bien el día.","fav.togo":"Para llevar","mc.h":"¿Cortes para tu asado?","mc.wa":"Pedir por WhatsApp","mc.p":"Pedidos por WhatsApp al 221 254 6202.","wa.carn":"Hola, quiero pedir cortes de la carnicería.","m.glass90":"Copa <i>90 ml</i>","m.end":"Precios en pesos mexicanos (MXN). Sujetos a cambio sin previo aviso.",
+ "mh.cri":"Nuestra pasión por la gastronomía mexicana es profunda y refleja un legado cultural en constante evolución. Combinamos técnicas de parrilla con sabores modernos para ofrecer platillos que honran nuestra herencia culinaria.","mh.tort":"Nuestras tortillas, hechas a mano en el comal al aire libre del restaurante, brindan un sabor único que evoca el México antiguo. Pídelas sin costo para disfrutar aquí o cómpralas para llevar.","mh.hig":"El gusto de comenzar bien el día.","mh.hig2":"Platillos preparados al momento · tiempo estimado: 20 min","mh.carn":"Carnicería","mh.carn2":"Res de nuestra ganadería · Teziutlán Sur 93","mc.big":"Pedidos por WhatsApp","nh.q":"El gusto de comenzar bien el día.","fav.togo":"Para llevar","mc.h":"¿Cortes para tu asado?","mc.wa":"Pedir por WhatsApp","mc.p":"Pedidos por WhatsApp al 221 254 6202.","wa.carn":"Hola, quiero pedir cortes de la carnicería.","m.glass90":"Copa <i>90 ml</i>","m.end":"Precios en pesos mexicanos (MXN). Sujetos a cambio sin previo aviso.","m.endnp":"Consulta precios y disponibilidad en el restaurante o por WhatsApp.","m.alsog":"También por copa","m.alsob":"También por botella","u.kg":"Por kilo","u.pz":"Por pieza","u.dz":"Por docena",
  "vi.eb":"Visítanos","vi.h":"Te esperamos en Teziutlán Sur 93.",
  "nos.k":"Grupo Artesanos de la Carne","nos.eb":"Desde 1939","nos.h":"Todo nace de una ganadería.","nos.p1":"Desde 1939 criamos res. Ese arduo trabajo de ganadería nos llevó a abrir el restaurante en 2019, para presentar nuestra propuesta gastronómica.","nos.p2":"La Higuera nace de La Crianza: somos el mismo lugar. En la mañana, La Higuera, desayunos por La Crianza; a partir de la 1:30 pm, La Crianza 1939. Y aquí mismo, nuestra carnicería.","nos.q":"Criamos, cortamos y servimos.",
  "co.hig2":"Desayunos · lunes a domingo","co.cri2":"Cortes a la parrilla y cocina mexicana","co.carn":"Cortes para tu asado, caldo de hueso y tortillas a mano. Pide por WhatsApp y pasa por ellos.","co.how":"Cómo llegar","co.wa":"WhatsApp",
@@ -2342,7 +2400,7 @@ var D={es:{
  "fav.eb":"House favorites","fav.h":"Don’t leave without trying these.","fav.from":"From","fav.cuts":"Rib eye, New York & T-bone","fav.carn":"Cuts for your grill",
  "lu.eb":"The place","lu.h":"A place to stay a while.","lu.c1":"The entrance","lu.c2":"Ground floor","lu.c3":"The terrace","lu.c4":"Your table","lu.p1":"Two signs, one house: La Higuera and La Crianza.","lu.p2":"The bar, the wood and the warm glow of the bulbs.","lu.p3":"Open air, among plants and wooden louvers.","lu.p4":"We’ll be waiting at Teziutlán Sur 93.","lu.a5":"Ground floor with the bar and wooden tables","lu.a1":"The restaurant terrace","lu.a2":"Entrance with the La Higuera and La Crianza signs","lu.a3":"Facade on Teziutlán Sur","lu.a4":"Tables on the terrace",
  "nh.eb":"Our story","nh.p":"The fig is much more than a simple fruit; it is a flower that folds inward, a symbol of introspection and rebirth. Inspired by that cycle, La Crianza created La Higuera: a restaurant in Colonia La Paz that celebrates the art of breakfast, every day from 8:30 am to 12:30 pm.",
- "mh.cri":"Our passion for Mexican cuisine runs deep and reflects a living cultural legacy. We combine grilling techniques with modern flavors to serve dishes that honor our culinary heritage.","mh.tort":"Our tortillas are made by hand on the open-air comal at the restaurant, with a flavor that recalls ancient Mexico. They are free with your meal, or take some home.","mh.hig":"The joy of starting the day right.","mh.hig2":"Made to order · about 20 min","mh.carn":"Butcher shop","mh.carn2":"Beef from our own ranch · Teziutlán Sur 93","mc.big":"Orders on WhatsApp","nh.q":"The joy of starting the day right.","fav.togo":"To take home","mc.h":"Cuts for your grill?","mc.wa":"Order on WhatsApp","mc.p":"Orders by WhatsApp at 221 254 6202.","wa.carn":"Hi, I’d like to order cuts from the butcher shop.","m.glass90":"Glass <i>90 ml</i>","m.end":"Prices in Mexican pesos (MXN). Subject to change without notice.",
+ "mh.cri":"Our passion for Mexican cuisine runs deep and reflects a living cultural legacy. We combine grilling techniques with modern flavors to serve dishes that honor our culinary heritage.","mh.tort":"Our tortillas are made by hand on the open-air comal at the restaurant, with a flavor that recalls ancient Mexico. They are free with your meal, or take some home.","mh.hig":"The joy of starting the day right.","mh.hig2":"Made to order · about 20 min","mh.carn":"Butcher shop","mh.carn2":"Beef from our own ranch · Teziutlán Sur 93","mc.big":"Orders on WhatsApp","nh.q":"The joy of starting the day right.","fav.togo":"To take home","mc.h":"Cuts for your grill?","mc.wa":"Order on WhatsApp","mc.p":"Orders by WhatsApp at 221 254 6202.","wa.carn":"Hi, I’d like to order cuts from the butcher shop.","m.glass90":"Glass <i>90 ml</i>","m.end":"Prices in Mexican pesos (MXN). Subject to change without notice.","m.endnp":"Ask for prices and availability at the restaurant or on WhatsApp.","m.alsog":"Also by the glass","m.alsob":"Also by the bottle","u.kg":"Per kilo","u.pz":"Per piece","u.dz":"Per dozen",
  "vi.eb":"Visit us","vi.h":"Find us at Teziutlán Sur 93.",
  "nos.k":"Grupo Artesanos de la Carne","nos.eb":"Since 1939","nos.h":"It all began on a cattle ranch.","nos.p1":"We have raised cattle since 1939. That hard ranch work led us to open the restaurant in 2019, to share our cuisine.","nos.p2":"La Higuera was born from La Crianza: we are the same place. In the morning, La Higuera, breakfast by La Crianza; from 1:30 pm, La Crianza 1939. And right here, our butcher shop.","nos.q":"We raise, we cut and we serve.",
  "co.hig2":"Breakfast · every day","co.cri2":"Grilled cuts and Mexican cuisine","co.carn":"Cuts for your grill, bone broth and handmade tortillas. Order on WhatsApp and pick them up.","co.how":"Getting here","co.wa":"WhatsApp",
@@ -2374,6 +2432,8 @@ function flagChip(code){ var f=FLAGS[code]; if(!f) return ""; return '<span clas
 
 /* ---------- helpers ---------- */
 var esc=function(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});};
+/* Prices hidden at the client's request (old screenshots got quoted back later). They stay in the sheets: true shows them again. */
+var SHOWP=false;
 var fmt=function(n){ var v=Number(n); if(n==null||n===""||!(v>0)) return ""; return "$"+v.toLocaleString("es-MX",v%1?{minimumFractionDigits:2,maximumFractionDigits:2}:{}); };
 var norm=function(s){return String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();};
 var slug=function(s){return norm(s).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");};
@@ -2388,6 +2448,7 @@ function unit(it){ var d=norm(it[1]); if(d.indexOf("precio por kilo")>=0) return
 function cleanDesc(it){ return String(it[1]||"").replace(/^Precio por (kilo|pieza|botella \(750 ml\)|copa \(90 ml\))\.?\s*/i,"").trim(); }
 function price(it){
   var p=it[2], p2=it[3]||"";
+  if(!SHOWP) return {main:"",lab:"",sub:/^copa/i.test(p2)?t("m.alsog"):(/^botella/i.test(p2)?t("m.alsob"):String(p2).replace(/\s*\$\s?[\d.,]+/g,"").trim())};
   if(/^copa/i.test(p2)) return {main:fmt(p),lab:t("m.bottle"),sub:(lang==="en"?p2.replace(/^copa/i,t("m.glass")):p2).replace(/\$\s?/,"$")};
   if(/^botella/i.test(p2)) return {main:fmt(p),lab:t("m.glass")+" 90 ml",sub:(lang==="en"?p2.replace(/^botella/i,t("m.bottle")):p2)};
   var m0=fmt(p); return {main:m0?m0+unit(it):"",lab:"",sub:p2};
@@ -2452,13 +2513,13 @@ function renderStatus(){
   $$("[data-card]").forEach(function(el){ var c=cardStatus(el.getAttribute("data-card"),el.hasAttribute("data-long")); el.classList.toggle("off",!c.open); $(".st",el).textContent=c.txt; });
 }
 
-Object.assign(D.es,{"nav.res":"Reservar","nav.res2":"Reservaciones","rs.k":"Tu mesa o tu evento, en Teziutlán Sur 93","rs.eb":"Reserva tu mesa","rs.h":"¿Dónde te esperamos?","rs.p":"Reserva tu mesa en línea. A partir de 9 personas, tu reservación es un evento: mira nuestros paquetes más abajo.","rs.pick":"Elige restaurante","rs.h.d":"Desayunos · 8:30 am a 12:30 pm","rs.c.d":"Comida y cena · desde la 1:30 pm",
- "rb.eb":"Reserva en línea","rb.go":"Reservar en línea","rb.big":"¿Son 9 personas o más?","rb.ev":"Ver paquetes para eventos ↓","rb.call":"¿Prefieres llamar?",
+Object.assign(D.es,{"nav.ev":"Eventos","nav.ev2":"Eventos","ev.k":"Celebraciones y reuniones en Teziutlán Sur 93","nav.res":"Reservar","nav.res2":"Reservaciones","rs.k":"Tu mesa o tu evento, en Teziutlán Sur 93","rs.eb":"Reserva tu mesa","rs.h":"¿Dónde te esperamos?","rs.p":"Reserva tu mesa en línea. A partir de 9 personas, tu reservación es un evento: mira nuestros paquetes en Eventos.","rs.pick":"Elige restaurante","rs.h.d":"Desayunos · 8:30 am a 12:30 pm","rs.c.d":"Comida y cena · desde la 1:30 pm",
+ "rb.eb":"Reserva en línea","rb.go":"Reservar en línea","rb.big":"¿Son 9 personas o más?","rb.ev":"Ver paquetes para eventos →","rb.call":"¿Prefieres llamar?",
  "rf.n":"Personas","rf.nm":"A nombre de","rf.pv":"Así llega tu mensaje","rf.go":"Enviar por WhatsApp","rf.note":"Se abre WhatsApp con tu mensaje listo para enviar.","rf.less":"Menos","rf.more":"Más",
  "ev.eb":"Eventos y grupos","ev.h":"Celebra con nosotros.","ev.p":"Para grupos de 9 personas o más: paquetes por persona y reservación por WhatsApp. Tenemos privados en planta alta para reuniones, conferencias y celebraciones.","ev.q":"¿Qué puedo celebrar?","ev.h.s":"Desayuno · 4 paquetes","ev.c.s":"Comida y cena · 4 paquetes",
  "ef.eb":"Cotiza tu evento","ef.h":"Mándanos los datos por WhatsApp","ef.pk":"Paquete","ef.d":"Fecha","ef.t":"Tipo de evento","ef.nmph":"Tu nombre o empresa"});
-Object.assign(D.en,{"nav.res":"Book","nav.res2":"Bookings","rs.k":"Your table or your event, at Teziutlán Sur 93","rs.eb":"Book a table","rs.h":"Where shall we expect you?","rs.p":"Book your table online. From 9 guests on, your booking is an event: see our packages below.","rs.pick":"Choose a restaurant","rs.h.d":"Breakfast · 8:30 am to 12:30 pm","rs.c.d":"Lunch & dinner · from 1:30 pm",
- "rb.eb":"Book online","rb.go":"Book online","rb.big":"9 guests or more?","rb.ev":"See event packages ↓","rb.call":"Rather call?",
+Object.assign(D.en,{"nav.ev":"Events","nav.ev2":"Events","ev.k":"Celebrations and meetings at Teziutlán Sur 93","nav.res":"Book","nav.res2":"Bookings","rs.k":"Your table or your event, at Teziutlán Sur 93","rs.eb":"Book a table","rs.h":"Where shall we expect you?","rs.p":"Book your table online. From 9 guests on, your booking is an event: see our packages under Events.","rs.pick":"Choose a restaurant","rs.h.d":"Breakfast · 8:30 am to 12:30 pm","rs.c.d":"Lunch & dinner · from 1:30 pm",
+ "rb.eb":"Book online","rb.go":"Book online","rb.big":"9 guests or more?","rb.ev":"See event packages →","rb.call":"Rather call?",
  "rf.n":"Guests","rf.nm":"Name","rf.pv":"The message you’ll send","rf.go":"Send on WhatsApp","rf.note":"WhatsApp opens with your message ready to send.","rf.less":"Fewer","rf.more":"More",
  "ev.eb":"Events & groups","ev.h":"Celebrate with us.","ev.p":"For groups of 9 or more: per-guest packages, booked on WhatsApp. We have private rooms upstairs for meetings, conferences and celebrations.","ev.q":"What can I celebrate?","ev.h.s":"Breakfast · 4 packages","ev.c.s":"Lunch & dinner · 4 packages",
  "ef.eb":"Get a quote","ef.h":"Send us the details on WhatsApp","ef.pk":"Package","ef.d":"Date","ef.t":"Type of event","ef.nmph":"Your name or company"});
@@ -2470,23 +2531,23 @@ var CEL=[["Baby shower","Baby shower"],["Primera comunión","First communion"],[
 var PP=[" por persona"," per guest"], PB=["por botella","per bottle"];
 var EV={
   higuera:{title:["Desayuno para tu evento","Breakfast for your event"],note:["Elige un paquete y cada invitado escoge un platillo de ese paquete.","Choose a package and each guest picks one dish from it."],hint:["Cada invitado elige uno","Each guest picks one"],
-    pk:[{p:210,it:[["Chilaquiles con pollo"],["Hot cakes naturales","Plain hot cakes"],["Molletes naturales","Plain molletes"]]},
-        {p:245,it:[["Toast La Higuera"],["Enchiladas de pipián verde","Green pipián enchiladas"],["Picaditas"]]},
-        {p:225,it:[["Hot cakes Higuera"],["Huevos rotos con serrano","Broken eggs with serrano"],["Omelette Philly"]]},
-        {p:190,it:[["Huevos al gusto","Eggs your way"],["Chilaquiles sin proteína","Chilaquiles, no protein"]]}],
+    from:190,pk:[{it:[["Chilaquiles con pollo"],["Hot cakes naturales","Plain hot cakes"],["Molletes naturales","Plain molletes"]]},
+        {it:[["Toast La Higuera"],["Enchiladas de pipián verde","Green pipián enchiladas"],["Picaditas"]]},
+        {it:[["Hot cakes Higuera"],["Huevos rotos con serrano","Broken eggs with serrano"],["Omelette Philly"]]},
+        {it:[["Huevos al gusto","Eggs your way"],["Chilaquiles sin proteína","Chilaquiles, no protein"]]}],
     inc:["Todos los paquetes incluyen café de refill y jugo de naranja (350 ml).","Every package includes refillable coffee and orange juice (350 ml)."],
-    ext:{h:["Agrega","Add"],rows:[[["Pan dulce","Pan dulce (sweet bread)"],"+$20",PP],[["Fruta de temporada","Seasonal fruit"],"+$25",PP]]},
-    desc:{h:["Descorche y servicios externos","Corkage & outside services"],rows:[[["Pastel externo","Outside cake"],"$200",["por cada 10 personas, incluye loza y cubiertos","per 10 guests, plates and cutlery included"]],[["Vino de mesa","Table wine"],"$200",PB],[["Destilados gama media","Mid-range spirits"],"$300",PB],[["Destilados gama alta","Premium spirits"],"$400",PB]]}},
-  crianza:{title:["Comida o cena para tu evento","Lunch or dinner for your event"],note:["Elige el paquete que más te guste. Los precios son por persona.","Choose the package you like best. Prices are per guest."],hint:null,
-    pk:[{p:550,it:[["2 chalupas por persona","2 chalupas per guest"],["New York Nacional (400 g) o Salmón (250 g)","New York Nacional (400 g) or salmon (250 g)"],["Guarnición: cremoso de papa","Side: creamy potato"],["½ panqué de elote por persona","½ corn cake per guest"]]},
-        {p:550,it:[["Sopa de hongos","Mushroom soup"],["Parrillada de New York, pollo, chistorra y chorizo, con arroz, guacamole, frijoles y tortillas","Mixed grill of New York, chicken, chistorra and chorizo, with rice, guacamole, beans and tortillas"],["½ panqué de elote por persona","½ corn cake per guest"]]},
-        {p:690,it:[["2 chalupas por persona","2 chalupas per guest"],["Sopa de hongos o sopa de tortilla","Mushroom or tortilla soup"],["Rib eye Nacional (400 g) o Filete Crianza (250 g)","Rib eye Nacional (400 g) or Filete Crianza (250 g)"],["Guarnición: papas a la francesa","Side: French fries"],["½ strudel de manzana por persona","½ apple strudel per guest"]]},
-        {p:820,it:[["2 chalupas por persona","2 chalupas per guest"],["½ ensalada de betabel y mango","½ beet and mango salad"],["Picaña Crianza (400 g) o Cowboy Nacional (400 g)","Picaña Crianza (400 g) or Cowboy Nacional (400 g)"],["Guarnición a elegir","Side of your choice"],["Cheesecake"]]}],
+    ext:{h:["Agrega","Add"],rows:[[["Pan dulce","Pan dulce (sweet bread)"],"",PP],[["Fruta de temporada","Seasonal fruit"],"",PP]]},
+    desc:{h:["Descorche y servicios externos","Corkage & outside services"],rows:[[["Pastel externo","Outside cake"],"",["por cada 10 personas, incluye loza y cubiertos","per 10 guests, plates and cutlery included"]],[["Vino de mesa","Table wine"],"",PB],[["Destilados gama media","Mid-range spirits"],"",PB],[["Destilados gama alta","Premium spirits"],"",PB]]}},
+  crianza:{title:["Comida o cena para tu evento","Lunch or dinner for your event"],note:["Elige el paquete que más te guste.","Choose the package you like best."],hint:null,
+    from:550,pk:[{it:[["2 chalupas por persona","2 chalupas per guest"],["New York Nacional (400 g) o Salmón (250 g)","New York Nacional (400 g) or salmon (250 g)"],["Guarnición: cremoso de papa","Side: creamy potato"],["½ panqué de elote por persona","½ corn cake per guest"]]},
+        {it:[["Sopa de hongos","Mushroom soup"],["Parrillada de New York, pollo, chistorra y chorizo, con arroz, guacamole, frijoles y tortillas","Mixed grill of New York, chicken, chistorra and chorizo, with rice, guacamole, beans and tortillas"],["½ panqué de elote por persona","½ corn cake per guest"]]},
+        {it:[["2 chalupas por persona","2 chalupas per guest"],["Sopa de hongos o sopa de tortilla","Mushroom or tortilla soup"],["Rib eye Nacional (400 g) o Filete Crianza (250 g)","Rib eye Nacional (400 g) or Filete Crianza (250 g)"],["Guarnición: papas a la francesa","Side: French fries"],["½ strudel de manzana por persona","½ apple strudel per guest"]]},
+        {it:[["2 chalupas por persona","2 chalupas per guest"],["½ ensalada de betabel y mango","½ beet and mango salad"],["Picaña Crianza (400 g) o Cowboy Nacional (400 g)","Picaña Crianza (400 g) or Cowboy Nacional (400 g)"],["Guarnición a elegir","Side of your choice"],["Cheesecake"]]}],
     inc:["Todos los paquetes vienen con salsas, tortillas y limones.","Every package comes with salsas, tortillas and limes."],
-    ext:{h:["Bebidas de refill","Refillable drinks"],sub:["Coca-Cola, Fresca, agua mineral, agua de jamaica, agua de limón y hielos.","Coca-Cola, Fresca, mineral water, hibiscus water, limeade and ice."],rows:[[["4 horas","4 hours"],"$150",PP],[["6 horas","6 hours"],"$170",PP],[["8 horas","8 hours"],"$190",PP]]},
-    desc:{h:["Descorche","Corkage"],rows:[[["Vino de mesa","Table wine"],"$200",PB],[["Destilados gama media","Mid-range spirits"],"$300",PB],[["Destilados gama alta","Premium spirits"],"$400",PB],[["Pastel","Cake"],"$200",["por cada 10 personas","per 10 guests"]]]}}
+    ext:{h:["Bebidas de refill","Refillable drinks"],sub:["Coca-Cola, Fresca, agua mineral, agua de jamaica, agua de limón y hielos.","Coca-Cola, Fresca, mineral water, hibiscus water, limeade and ice."],rows:[[["Por 4, 6 u 8 horas","For 4, 6 or 8 hours"],"",PP]]},
+    desc:{h:["Descorche","Corkage"],rows:[[["Vino de mesa","Table wine"],"",PB],[["Destilados gama media","Mid-range spirits"],"",PB],[["Destilados gama alta","Premium spirits"],"",PB],[["Pastel","Cake"],"",["por cada 10 personas","per 10 guests"]]]}}
 };
-var TERMS=[["Paquetes para grupos de 9 personas o más.","Packages are for groups of 9 or more."],["Los precios incluyen IVA y no incluyen propina.","Prices include VAT and do not include tip."],["Para apartar la fecha se pide un anticipo del 50%; el resto se liquida un día antes.","A 50% deposit holds the date; the balance is due the day before."],["No hay reembolsos. Los lugares extra se cobran bajo los mismos términos.","No refunds. Extra places are charged on the same terms."]];
+var TERMS=[["Paquetes para grupos de 9 personas o más.","Packages are for groups of 9 or more."],["Precios por persona, sujetos a cambio sin previo aviso.","Prices are per guest and subject to change without notice."],["Los precios incluyen IVA y no incluyen propina.","Prices include VAT and do not include tip."],["Para apartar la fecha se pide un anticipo del 50%; el resto se liquida un día antes.","A 50% deposit holds the date; the balance is due the day before."],["No hay reembolsos. Los lugares extra se cobran bajo los mismos términos.","No refunds. Extra places are charged on the same terms."]];
 function L2(x){ return x ? (lang==="en"&&x[1]!=null?x[1]:x[0]) : ""; }
 function mxToday(){
   try{ var p=new Intl.DateTimeFormat("en-US",{timeZone:"America/Mexico_City",year:"numeric",month:"numeric",day:"numeric"}).formatToParts(new Date()), g=function(k){ return +p.filter(function(z){return z.type===k;})[0].value; }; return Date.UTC(g("year"),g("month")-1,g("day")); }
@@ -2494,7 +2555,7 @@ function mxToday(){
 }
 /* bookable start times: every 30 min, the last one an hour before closing; today only from 30 min from now */
 function fmtD(d,o){ o.timeZone="UTC"; return new Intl.DateTimeFormat(lang==="en"?"en-US":"es-MX",o).format(d); }
-function rows(list){ return list.map(function(r){ var u=(r[2]===PP||r[2]===PB)?"":'<small>'+esc(L2(r[2]).trim())+'</small>'; return '<li class="pr"><span>'+esc(L2(r[0]))+'</span><i></i><b>'+r[1]+'</b>'+u+'</li>'; }).join(""); }
+function rows(list){ return list.map(function(r){ var u=(r[2]===PP||r[2]===PB)?"":'<small>'+esc(L2(r[2]).trim())+'</small>'; if(!r[1]) return '<li class="pr np"><span>'+esc(L2(r[0]))+'</span>'+u+'</li>'; return '<li class="pr"><span>'+esc(L2(r[0]))+'</span><i></i><b>'+r[1]+'</b>'+u+'</li>'; }).join(""); }
 function renderRS(){
   if(!$("#rbx")) return;
   if(!RS.k) RS.k=brandNow();
@@ -2506,7 +2567,7 @@ function renderRS(){
   $("#rbT").textContent=en?"Book your table at "+p.short:"Aparta tu mesa en "+p.short;
   $("#rbP").textContent=en?"Choose the day, time and number of guests in our booking system, for groups of up to 8.":"Elige día, hora y número de personas en nuestro sistema de reservaciones, para grupos de hasta 8 personas.";
   $("#rbHr").textContent=hg?(en?"Monday to Sunday · 8:30 am to 12:30 pm":"Lunes a domingo · 8:30 am a 12:30 pm"):(en?"Monday to Sunday · from 1:30 pm":"Lunes a domingo · desde la 1:30 pm");
-  var tl=$("#rbTel"); tl.href="tel:"+p.tel; tl.textContent=p.txt;
+  var tl=$("#rbTel"); tl.href="tel:"+p.tel; tl.textContent=p.txt; $("#rbEv").href="#/eventos/"+k;
   renderEV();
 }
 function renderEV(){
@@ -2516,13 +2577,14 @@ function renderEV(){
 $$("#evSw .evt").forEach(function(b){ b.setAttribute("aria-pressed",String(b.getAttribute("data-ek")===k)); });
   var sw=$("#evSwap"), to=k==="crianza"?"higuera":"crianza"; sw.className="btn evp-sw "+(to==="higuera"?"h":"c"); sw.innerHTML='<span>'+(en?"See packages from ":"Ver paquetes de ")+'<b>'+CFG.phones[to].short+'</b></span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>';
   var cel=CEL.map(function(c){ return '<span class="tag">'+esc(L2(c))+'</span><i class="dia" aria-hidden="true"></i>'; }).join(""); $("#evCel").innerHTML='<div class="mq-t">'+cel+cel+cel+cel+'</div>'; $("#evCel").setAttribute("aria-label",CEL.map(L2).join(", "));
-  $("#evT").textContent=L2(e.title); $("#evNote").textContent=L2(e.note);
+  $("#evT").textContent=L2(e.title); $("#evNote").innerHTML=esc(L2(e.note))+' <span class="ev-from">'+(en?"From ":"Desde ")+'<b>$'+e.from+'</b> '+(en?"per guest":"por persona")+'</span>';
+  $("#evLead").innerHTML=en?"Enjoy family or business events with us: packages from <b>$"+EV.higuera.from+"</b> per guest at La Higuera and from <b>$"+EV.crianza.from+"</b> at La Crianza. For groups of 9 or more, with private rooms upstairs for meetings, conferences and celebrations.":"Disfruta eventos familiares o empresariales con nosotros: paquetes desde <b>$"+EV.higuera.from+"</b> por persona en La Higuera y desde <b>$"+EV.crianza.from+"</b> en La Crianza. Para grupos de 9 personas o más, con privados en planta alta para reuniones, conferencias y celebraciones.";
   $("#pks").innerHTML=e.pk.map(function(x,i){ var on=EVS.pk===i;
-    return '<article class="pkc'+(on?" on":"")+'"><span class="pk-n">'+(en?"Package ":"Paquete ")+(i+1)+'</span><div class="pk-p"><b>$'+x.p+'</b><small>'+(en?"per guest":"por persona")+'</small></div>'+(e.hint?'<span class="pk-h">'+L2(e.hint)+'</span>':"")+'<ul>'+x.it.map(function(it){ return '<li>'+esc(L2(it))+'</li>'; }).join("")+'</ul><button type="button" class="btn'+(on?" pri":"")+' pk-go" data-pkgo="'+i+'" aria-pressed="'+on+'"><span>'+(on?(en?"Chosen":"Elegido"):(en?"Choose this package":"Elegir paquete"))+'</span><span class="ic" aria-hidden="true">'+(on?'<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.3 5 8.6l4.5-5"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>')+'</span></button></article>'; }).join("");
-  $("#evx").innerHTML='<div class="exb"><span class="fl-l">'+(en?"Included":"Incluye")+'</span><p class="inc">'+esc(L2(e.inc))+'</p><span class="fl-l">'+esc(L2(e.ext.h))+'</span>'+(e.ext.sub?'<p class="sub">'+esc(L2(e.ext.sub))+'</p>':"")+'<ul class="prs">'+rows(e.ext.rows)+'</ul><p class="unit">'+(en?"Prices per guest":"Precios por persona")+'</p></div>'
-    +'<div class="exb"><span class="fl-l">'+esc(L2(e.desc.h))+'</span><ul class="prs">'+rows(e.desc.rows)+'</ul><p class="unit">'+(en?"Wine and spirits, per bottle":"Vinos y destilados, por botella")+'</p></div>'
+    return '<article class="pkc'+(on?" on":"")+'"><span class="pk-n">'+(en?"Package ":"Paquete ")+(i+1)+'</span>'+(e.hint?'<span class="pk-h">'+L2(e.hint)+'</span>':"")+'<ul>'+x.it.map(function(it){ return '<li>'+esc(L2(it))+'</li>'; }).join("")+'</ul><button type="button" class="btn'+(on?" pri":"")+' pk-go" data-pkgo="'+i+'" aria-pressed="'+on+'"><span>'+(on?(en?"Chosen":"Elegido"):(en?"Choose this package":"Elegir paquete"))+'</span><span class="ic" aria-hidden="true">'+(on?'<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.3 5 8.6l4.5-5"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>')+'</span></button></article>'; }).join("");
+  $("#evx").innerHTML='<div class="exb"><span class="fl-l">'+(en?"Included":"Incluye")+'</span><p class="inc">'+esc(L2(e.inc))+'</p><span class="fl-l">'+esc(L2(e.ext.h))+'</span>'+(e.ext.sub?'<p class="sub">'+esc(L2(e.ext.sub))+'</p>':"")+'<ul class="prs">'+rows(e.ext.rows)+'</ul><p class="unit">'+(en?"Extra cost per guest; ask us for it.":"Con costo adicional por persona; pregúntanos.")+'</p></div>'
+    +'<div class="exb"><span class="fl-l">'+esc(L2(e.desc.h))+'</span><ul class="prs">'+rows(e.desc.rows)+'</ul><p class="unit">'+(en?"Ask us for current corkage fees.":"Pregúntanos por el costo vigente.")+'</p></div>'
     +'<div class="exb"><span class="fl-l">'+(en?"Terms and conditions":"Términos y condiciones")+'</span><ul class="trm">'+TERMS.map(function(x){ return '<li>'+esc(L2(x))+'</li>'; }).join("")+'</ul></div>';
-  $("#efP").innerHTML=e.pk.map(function(x,i){ return '<button type="button" class="opt" data-pk="'+i+'" aria-pressed="'+(EVS.pk===i)+'">'+(i+1)+' · $'+x.p+'</button>'; }).join("");
+  $("#efP").innerHTML=e.pk.map(function(x,i){ return '<button type="button" class="opt" data-pk="'+i+'" aria-pressed="'+(EVS.pk===i)+'">'+(en?"Package ":"Paquete ")+(i+1)+'</button>'; }).join("");
   $("#efT").innerHTML=CEL.map(function(c,i){ return '<button type="button" class="opt" data-et="'+i+'" aria-pressed="'+(EVS.type===i)+'">'+esc(L2(c))+'</button>'; }).join("");
   $("#efD").min=new Date(mxToday()).toISOString().slice(0,10);
   $("#efNo").textContent=EVS.n;
@@ -2531,7 +2593,7 @@ $$("#evSw .evt").forEach(function(b){ b.setAttribute("aria-pressed",String(b.get
 function evMsg(){
   var k=RS.k||brandNow(), e=EV[k], p=CFG.phones[k], en=lang==="en", v=$("#efD").value, nm=$("#efNm").value.trim();
   var L=[en?"Hi, I’d like a quote for an event at "+p.name+".":"Hola, quiero cotizar un evento en "+p.name+".",""];
-  L.push("• "+(EVS.pk!=null?(en?"Package ":"Paquete ")+(EVS.pk+1)+" ($"+e.pk[EVS.pk].p+L2(PP)+")":(en?"Package: not decided yet":"Paquete: aún no lo decido")));
+  L.push("• "+(EVS.pk!=null?(en?"Package ":"Paquete ")+(EVS.pk+1):(en?"Package: not decided yet":"Paquete: aún no lo decido")));
   L.push("• "+(en?"Date: ":"Fecha: ")+(v?fmtD(new Date(v+"T00:00:00Z"),{weekday:"long",day:"numeric",month:"long",year:"numeric"}):(en?"to be defined":"por definir")));
   L.push("• "+(en?"Guests: ":"Personas: ")+EVS.n);
   if(EVS.type!=null) L.push("• "+(en?"Event: ":"Evento: ")+L2(CEL[EVS.type]).toLowerCase());
@@ -2541,8 +2603,8 @@ function evMsg(){
 }
 function rsJump(a){ var el=$(a==="eventos"?"#eventos":".rpk"); if(!el) return; setTimeout(function(){ scrollTo({top:el.getBoundingClientRect().top+scrollY-(a==="eventos"?40:110),behavior:reduce?"auto":"smooth"}); },60); }
 (function(){
-  var pg=$('[data-page="reservar"]'); if(!pg) return;
-  pg.addEventListener("click",function(ev){
+  /* one handler for both pages: booking (Reservar) and packages (Eventos) */
+  $$('[data-page="reservar"],[data-page="eventos"]').forEach(function(pg){ pg.addEventListener("click",function(ev){
     var b=ev.target.closest("button"); if(!b || !pg.contains(b)) return;
     var a;
     if((a=b.getAttribute("data-rk"))){ if(a!==RS.k){ RS.k=a; EVS.pk=0; renderRS(); } return; }
@@ -2552,7 +2614,7 @@ function rsJump(a){ var el=$(a==="eventos"?"#eventos":".rpk"); if(!el) return; s
     if((a=b.getAttribute("data-pkgo"))!=null){ EVS.pk=+a; renderEV(); var f=$("#evf"); scrollTo({top:f.getBoundingClientRect().top+scrollY-90,behavior:reduce?"auto":"smooth"}); return; }
     if((a=b.getAttribute("data-pk"))!=null){ EVS.pk=+a; renderEV(); return; }
     if((a=b.getAttribute("data-et"))!=null){ EVS.type=(EVS.type===+a)?null:+a; renderEV(); return; }
-  });
+  }); });
   $("#efNm").addEventListener("input",evMsg);
   $("#efD").addEventListener("input",evMsg); $("#efD").addEventListener("change",evMsg);
   $$("#evf").forEach(function(f){ f.addEventListener("submit",function(e){ e.preventDefault(); }); });
@@ -2610,14 +2672,14 @@ function renderFavs(){
   var rows=FAVS.map(function(f,k){
     var tag=f[0]==="carniceria"?t("c.carn.t"):CFG.phones[f[0]].name, name="", pr="", href="#/menu/"+f[0];
     if(f[1]==="cuts"){ var ps=["Ribeye 400 g","New York 400 g","T-bone 400 g"].map(function(n){ var r=findByName("crianza",n); return r?r.it[2]:null; }).filter(Boolean); var r0=findByName("crianza","Ribeye 400 g");
-      name=t("fav.cuts"); pr=ps.length?t("fav.from")+" "+fmt(Math.min.apply(null,ps)):""; if(r0) href+="/"+slug(r0.sec+"-"+r0.cat); }
+      name=t("fav.cuts"); pr=SHOWP&&ps.length?t("fav.from")+" "+fmt(Math.min.apply(null,ps)):""; if(r0) href+="/"+slug(r0.sec+"-"+r0.cat); }
     else if(f[1]==="carn"){ name=t("fav.carn"); pr=t("fav.togo"); }
-    else { var r=findByName(f[0],f[1]); if(!r) return null; name=split(r.it[0]).n; pr=fmt(r.it[2]); href+="/"+slug(r.sec+"-"+r.cat); }
+    else { var r=findByName(f[0],f[1]); if(!r) return null; name=split(r.it[0]).n; pr=SHOWP?fmt(r.it[2]):""; href+="/"+slug(r.sec+"-"+r.cat); }
     return {b:f[0],tag:tag,name:name,pr:pr,href:href,img:f[2],d:t("fav.d"+(k+1))};
   }).filter(Boolean);
   var pad=function(n){return (n<10?"0":"")+n;};
   fr.innerHTML=rows.map(function(r,k){ return '<img '+srcs(r.img,"(max-width:900px) 92vw, 640px")+' alt=""'+(k?' loading="lazy"':'')+' decoding="async">'; }).join("");
-  el.innerHTML=rows.map(function(r,k){ return '<li><a class="fc-it" href="'+r.href+'" data-fi="'+k+'"><span class="fc-no">'+pad(k+1)+'</span><div><span class="fc-tg '+r.b+'">'+esc(r.tag)+'</span><div class="fc-row"><b class="fc-nm">'+esc(r.name)+'</b><span class="fc-ld"></span><span class="fc-pr">'+esc(r.pr)+'</span></div><p class="fc-ds">'+esc(r.d)+'</p></div><span class="fc-pic"><span><img '+srcs(r.img,"92vw")+' alt="" loading="lazy" decoding="async"></span></span></a></li>'; }).join("");
+  el.innerHTML=rows.map(function(r,k){ return '<li><a class="fc-it" href="'+r.href+'" data-fi="'+k+'"><span class="fc-no">'+pad(k+1)+'</span><div><span class="fc-tg '+r.b+'">'+esc(r.tag)+'</span><div class="fc-row"><b class="fc-nm">'+esc(r.name)+'</b><span class="fc-ld"></span>'+(r.pr?'<span class="fc-pr">'+esc(r.pr)+'</span>':"")+'</div><p class="fc-ds">'+esc(r.d)+'</p></div><span class="fc-pic"><span><img '+srcs(r.img,"92vw")+' alt="" loading="lazy" decoding="async"></span></span></a></li>'; }).join("");
   var imgs=$$("img",fr), its=$$(".fc-it",el), cur=-1, touch=window.matchMedia("(hover:none)").matches;
   function show(k){ if(k===cur) return; cur=k; imgs.forEach(function(im,j){ im.classList.toggle("on",j===k); }); its.forEach(function(it,j){ it.classList.toggle("on",j===k); }); $("#fccap").textContent=rows[k].d; $("#fcnum").textContent=pad(k+1); }
   its.forEach(function(it){ var k=+it.getAttribute("data-fi");
@@ -2765,22 +2827,31 @@ function defaultMenu(){ var n=now(); return (n.t>=5 && n.t<12.5) ? "higuera" : "
 var cur=defaultMenu(), tab="carta", q="", menuBuilt=false, pendingCat="";
 function tabsFor(k){ return TABS[k]||[]; }
 function secsFor(k,tb){ var tbs=tabsFor(k); if(!tbs.length) return M[k].secs; var x=tbs.filter(function(z){return z[0]===tb;})[0]||tbs[0]; return M[k].secs.filter(function(s){return x[2].indexOf(s.s)>=0;}); }
-function priceHTML(it){ var p=price(it); return (p.lab?'<small>'+esc(p.lab)+'</small>':"")+p.main+(p.sub?'<small>'+esc(p.sub)+'</small>':""); }
+function priceHTML(it){ var p=price(it); if(!SHOWP) return p.sub?'<small>'+esc(p.sub)+'</small>':""; return (p.lab?'<small>'+esc(p.lab)+'</small>':"")+p.main+(p.sub?'<small>'+esc(p.sub)+'</small>':""); }
 function num(p2){ var m=String(p2||"").match(/\$\s?([\d,]+)/); return m?"$"+m[1]:""; }
 function pair(it,kind){ var p2=it[3]||""; if(kind==="wine") return {g:/^copa/i.test(p2)?num(p2):"", b:fmt(it[2])}; return {g:fmt(it[2]), b:/^botella/i.test(p2)?num(p2):""}; }
+/* With prices hidden, the portion (from the name or a single "(200 g)" in the description) sits where the price was */
+function portion(s,d){
+  var q=s.q, dd=d||"";
+  if(!q && dd){ var mm=dd.match(/\s*\((\d[\d.,]*\s?(?:g|kg|ml|l|piezas?|pzas?)\b[^()]*)\)/gi);
+    if(mm && mm.length===1){ var x=mm[0].replace(/^\s*\(|\)$/g,""); if(x.length<=14){ q=x; dd=dd.replace(mm[0],"").replace(/\s+([.,;:])/g,"$1").replace(/\(\s*\)/g,"").trim(); } } }
+  return {q:q,d:dd};
+}
 function dish(it,withThumb,dd,tb){
   var f=itemFlag(it[0]), s=split(f.name), d=(dd!=null?dd:cleanDesc(it)), th=withThumb&&it[4];
-  var prc;
+  var prc, po=(!SHOWP&&!tb)?portion(s,d):null;
+  if(po && po.q){ d=po.d; s={n:s.n,q:""}; }
   if(tb){ var pp=pair(it,tb.kind); prc=(tb.g?'<div class="pc1">'+(pp.g||"—")+'</div>':"")+(tb.b?'<div class="pc2">'+(pp.b||"—")+'</div>':""); }
-  else prc='<div class="pr">'+priceHTML(it)+'</div>';
-  return '<div class="dish'+(th?" wp":"")+(tb?" tb n"+((tb.g?1:0)+(tb.b?1:0)):"")+'">'+
+  else if(po && po.q){ var sb=price(it).sub; prc='<div class="pr pt">'+esc(po.q)+(sb?'<small>'+esc(sb)+'</small>':"")+'</div>'; }
+  else { var phx=priceHTML(it); prc=phx?'<div class="pr">'+phx+'</div>':""; }
+  return '<div class="dish'+(prc?"":" np")+(th?" wp":"")+(tb?" tb n"+((tb.g?1:0)+(tb.b?1:0)):"")+'">'+
     (th?'<button class="th" type="button" data-z="'+it[4]+'" data-t="'+esc(s.n)+'" data-p="'+esc(price(it).main)+'" aria-label="'+esc(s.n)+'"><img src="'+T(it[4])+'" alt="" loading="lazy" decoding="async"></button>':"")+
     '<div class="t"><h4>'+(f.fl?flag(f.fl,true):"")+hl(s.n,q)+'</h4>'+(s.q?'<span class="q">'+esc(s.q)+'</span>':"")+'</div>'+
     prc+(d?'<p>'+hl(d,q)+'</p>':"")+'</div>';
 }
 function card(it){
   var s=split(it[0]), p=price(it);
-  return '<button class="pc" type="button" data-z="'+it[4]+'" data-t="'+esc(s.n)+'" data-p="'+esc(p.main)+'"><div class="core"><img '+srcs(it[4],"(max-width:900px) 70vw, 320px")+' alt="" loading="lazy" decoding="async"></div><div class="o"><b>'+esc(s.n)+'</b><i>'+p.main+'</i>'+(s.q?'<span>'+esc(s.q)+'</span>':"")+'</div></button>';
+  return '<button class="pc" type="button" data-z="'+it[4]+'" data-t="'+esc(s.n)+'" data-p="'+esc(p.main)+'"><div class="core"><img '+srcs(it[4],"(max-width:900px) 70vw, 320px")+' alt="" loading="lazy" decoding="async"></div><div class="o"><b>'+esc(s.n)+'</b>'+(p.main?'<i>'+p.main+'</i>':"")+''+(s.q?'<span>'+esc(s.q)+'</span>':"")+'</div></button>';
 }
 /* Sentences every item in a category repeats ("Incluye una guarnición…") are shown once under the title */
 function sents(d){ return String(d||"").replace(/\.\s+/g,".\u0001").split("\u0001").map(function(x){return x.trim();}).filter(Boolean); }
@@ -2793,10 +2864,16 @@ function prep(c){
   }
   return {ds:ds,note:note.join(" ")};
 }
+/* Carnicería without prices: each product hangs as a butcher's tag with its unit (por kilo, por pieza, por docena) */
+function tagUnit(it){ var d=norm(it[1]); if(d.indexOf("por kilo")>=0) return t("u.kg"); if(d.indexOf("por pieza")>=0) return t("u.pz"); if(d.indexOf("por docena")>=0) return t("u.dz"); return ""; }
+function tagCat(c){ return cur==="carniceria" && !SHOWP && c.items.every(function(it){ return !it[4] && !String(it[1]||"").replace(/^Precio por (kilo|pieza|docena)\.?\s*/i,"").trim(); }); }
+function tagHTML(it){ var s=split(it[0]), u=tagUnit(it), sub=[s.q,u].filter(Boolean).join(" · ");
+  return '<li class="ctag"><i aria-hidden="true"></i><b>'+hl(s.n,q)+'</b>'+(sub?'<small>'+esc(sub)+'</small>':"")+'</li>'; }
 function catHTML(sec,c,idx){
   var id="c-"+slug(sec+"-"+c.c), ph=c.items.filter(function(i){return i[4];}), n=c.items.length, fl=CAT_FLAG[c.c];
   var intro=INTRO[c.c]?INTRO[c.c][lang==="en"?1:0]:"", pr=prep(c), D=function(i){ return pr.ds[c.items.indexOf(i)]; };
-  var kind=sec==="Vinos"?"wine":(sec==="Destilados"?"spirit":""), tb=null;
+  if(!SHOWP && /^(Precio|Priced)/.test(intro)) intro="";
+  var kind=!SHOWP?"":(sec==="Vinos"?"wine":(sec==="Destilados"?"spirit":"")), tb=null;
   if(kind){ tb={kind:kind,g:false,b:false}; c.items.forEach(function(it){ var pp=pair(it,kind); if(pp.g) tb.g=true; if(pp.b) tb.b=true; }); }
   var head='<div class="cat-h"><h3>'+esc(catName(c.c))+'</h3>'+(fl?flagChip(fl):"")+'<span class="n">'+n+" "+(n===1?t("m.opt"):t("m.opts"))+'</span></div>'+(intro?'<p class="intro">'+esc(intro)+'</p>':"")+(pr.note?'<p class="cnote">'+esc(pr.note)+'</p>':"");
   var body="";
@@ -2808,6 +2885,7 @@ function catHTML(sec,c,idx){
   }
   var ban=c.img && !used[c.img] && !(ph.length===1 && ph[0][4]===c.img) ? '<div class="banner shell rv"><div class="core"><img src="'+L(c.img)+'" alt="" loading="lazy" decoding="async"></div></div>' : "";
   if(c.img) used[c.img]=1; ph.forEach(function(i){ used[i[4]]=1; });
+  if(tagCat(c)) return '<section class="cat" id="'+id+'" data-name="'+esc(catName(c.c))+'">'+head+'<div class="body">'+ban+'<ul class="ctags">'+c.items.map(tagHTML).join("")+'</ul></div></section>';
   var cols=n>=4, thd="";
   if(tb){ var nn=(tb.g?1:0)+(tb.b?1:0), cell=function(dup){ return '<div class="ptab n'+nn+(dup?" dup":"")+'" aria-hidden="true"><span></span>'+(tb.g?'<span>'+(kind==="spirit"?t("m.glass90"):esc(t("m.glass")))+'</span>':"")+(tb.b?'<span>'+t("m.bottle")+'</span>':"")+'</div>'; }; thd=cell(false)+(cols?cell(true):""); }
   body='<div class="body'+(cols?" cols":"")+'">'+ban+thd+c.items.map(function(i){return dish(i,true,D(i),tb);}).join("")+'</div>';
@@ -2856,7 +2934,7 @@ function renderMenu(){
   });
   if(cur!=="carniceria") list=mhead()+list;
   if(cur==="carniceria") list=mhead()+'<div class="mcta shell rv"><div class="core"><div class="tx"><b>'+t("mc.h")+'</b><span>'+t("mc.p")+'</span></div><div class="row"><a class="btn pri" data-wa="crianza" data-wamsg="carn" href="#" target="_blank" rel="noopener"><span>'+t("mc.wa")+'</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span></a><a class="btn" data-tel="crianza" href="tel:'+CFG.phones.crianza.tel+'"><span>'+t("call")+'</span><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3.2l1.6 4-2.1 1.3a11 11 0 0 0 5 5l1.3-2.1 4 1.6V17a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span></a></div></div></div>'+list;
-  list+='<p class="mnote end">'+t("m.end")+'</p>';
+  list+='<p class="mnote end">'+t(SHOWP?"m.end":"m.endnp")+'</p>';
   $("#toc").innerHTML=toc; $("#list").innerHTML=list; $("#list").setAttribute("data-m",cur); $("#sheetIn").innerHTML=sheet;
   if(tab==="bar"){ var small=matchMedia("(max-width:760px)").matches; $$("#list .cat").forEach(function(c){ c.classList.add("cfold"); c.classList.toggle("open",!small); var h=$(".cat-h",c); h.setAttribute("role","button"); h.setAttribute("tabindex","0"); h.setAttribute("aria-expanded",String(!small)); }); }
   $("#fabT").textContent=t("m.index");
@@ -2986,7 +3064,7 @@ function tourTick(vh){
 }
 
 /* ---------- Router with curtain ---------- */
-var heroPlayed=false, route="", ROUTES=["inicio","menu","reservar","nosotros","contacto"], busy=false, covering=false;
+var heroPlayed=false, route="", ROUTES=["inicio","menu","reservar","eventos","nosotros","contacto"], busy=false, covering=false;
 function parse(){ var h=(location.hash||"").replace(/^#\/?/,"").split("/"); var r=h[0]||"inicio"; if(ROUTES.indexOf(r)<0) r="inicio"; return {r:r,a:h[1]||"",b:h[2]||""}; }
 function show(p){
   route=p.r;
@@ -3002,17 +3080,18 @@ function show(p){
   document.documentElement.classList.toggle("home",p.r==="inicio");
   if(p.r==="inicio") lockHero();
   if(p.r==="inicio" && heroPlayed) playHero(); heroPlayed=true;
-  if(p.r==="reservar"){ if(p.a && CFG.phones[p.a]) RS.k=p.a; renderRS(); }
+  if(p.r==="reservar" && p.a==="eventos"){ location.replace("#/eventos"); return; }
+  if(p.r==="reservar"||p.r==="eventos"){ if(p.a && CFG.phones[p.a]) RS.k=p.a; renderRS(); }
   setTitle(); scrollTo(0,0); reveal(); collectSL(); renderStatus();
   if(p.r==="reservar" && p.a) rsJump(p.a);
 }
-var TITLES={inicio:["La Crianza 1939 · La Higuera · Puebla","La Crianza 1939 · La Higuera · Puebla"],menu:["Menú · La Crianza 1939 y La Higuera","Menu · La Crianza 1939 & La Higuera"],nosotros:["Nosotros · La Crianza 1939","About · La Crianza 1939"],contacto:["Contacto · La Crianza 1939","Contact · La Crianza 1939"],reservar:["Reservaciones y eventos · La Crianza 1939 y La Higuera","Bookings & events · La Crianza 1939 & La Higuera"]};
+var TITLES={inicio:["La Crianza 1939 · La Higuera · Puebla","La Crianza 1939 · La Higuera · Puebla"],menu:["Menú · La Crianza 1939 y La Higuera","Menu · La Crianza 1939 & La Higuera"],nosotros:["Nosotros · La Crianza 1939","About · La Crianza 1939"],contacto:["Contacto · La Crianza 1939","Contact · La Crianza 1939"],reservar:["Reservaciones · La Crianza 1939 y La Higuera","Bookings · La Crianza 1939 & La Higuera"],eventos:["Eventos · La Crianza 1939 y La Higuera","Events · La Crianza 1939 & La Higuera"]};
 function setTitle(){ if(route && TITLES[route]) document.title=TITLES[route][lang==="en"?1:0]; }
 function go(){
   var p=parse();
   if(!route){ show(p); return; }
   if(covering) return; /* the curtain is still closing: it opens on whatever the address says by then */
-  if(p.r===route){ if(p.r==="menu") show(p); else if(p.r==="reservar" && p.a){ if(CFG.phones[p.a]){ RS.k=p.a; renderRS(); } rsJump(p.a); } else scrollTo({top:0,behavior:reduce?"auto":"smooth"}); return; }
+  if(p.r===route){ if(p.r==="menu") show(p); else if((p.r==="reservar"||p.r==="eventos") && p.a){ if(CFG.phones[p.a]){ RS.k=p.a; renderRS(); } if(p.r==="reservar") rsJump(p.a); } else scrollTo({top:0,behavior:reduce?"auto":"smooth"}); return; }
   if(reduce||busy){ show(p); return; }
   busy=true; covering=true; var c=$("#curtain"); c.classList.remove("leave"); void c.offsetWidth; c.classList.add("cover");
   setTimeout(function(){
